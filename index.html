@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>The Sad Bag</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      body {font-family: "Lato", sans-serif}
+      .mySlides {display: none}
+    </style>
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="w3-container w3-padding w3-center w3-opacity w3-light-grey w3-xlarge">
+      <h1 class="w3-wide">The Sad Bag</h1>
+    </header>
+
+    <!-- Page content -->
+    <div class="w3-content w3-hide" id="has-bag" style="max-width:2000px;margin-top:46px">
+
+      <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" >
+
+        <div class="w3-cell w3-cell-middle w3-padding-32" id="image">
+          <img class="w3-padding" src="https://drive.google.com/thumbnail?id=1722RI6NmYmHMV-_njl8ESH7zQwSt2nQP" alt="The Sad Bag">
+        </div>
+        <div class="w3-cell" id="message">
+          <h2 class="w3-wide">I'm Lost!!!</h2>
+          <p class="w3-opacity"><i>I hope you can help me!?!!</i></p>
+          <p class="w3-justify">I'm just a small bag in a big world.  I'm am very sad and lonely without my person.  Can you help me?</p>
+          <p class="w3-justify">I think my person knows I'm gone, but I need help letting them know where I am.  You can help by clicking below to let my person know exactly where I am.  (You may be asked to allow the current location to be sent to my person so they know where I am.)</p>
+        </div>
+      </div>
+      <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="form">
+        <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
+          <p><button type="submit" class="w3-center">Send My Location to My Person!</button></p>
+
+          <p><label for="tel">Contact Number (optional):</label>
+          <input type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
+
+          <p><label for="note">Note (optional):</label>
+          <input type="text" name="note" placeholder="Any information or &quot;Lost and Found&quot; location?" id="note" size="45"/></p>
+
+          <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
+        </form>
+        <p class="w3-center" id="msg"><?= msg ?><br /></p>
+      </div>
+    </div>
+    <!-- End Page Content -->
+
+    <!-- No Bag -->
+    <div class="w3-content w3-hide" id="no-bag" style="max-width:2000px;margin-top:46px">
+      <h2 class="w3-center">Yep, you scanned a QR Code!!!</h2>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
+      <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+      <p class="w3-medium">&copy; Copyright 2024-2025, The Sad Bag</p>
+    </footer>
+
+    <script>
+      const x = document.getElementById("msg");
+      const url = "";
+      const searchParams = new URLSearchParams(location.search);
+
+      if searchParams.has("bagid") {
+        const bagid = searchParams.get("bagid");
+        show_hide("has-bag");
+        sendEmail('', '')
+      } else {
+        show_hide("nobag");
+      }
+
+      function getLocation() {
+        x.innerHTML = "Starting to get a position... <br />"
+        if (navigator.geolocation) {
+          x.innerHTML = x.innerHTML + "It's possible to get the location... <br />"
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+          x.innerHTML = x.innerHTML + "Asked for the location... <br />"
+        } else { 
+          x.innerHTML = x.innerHTML + "Geolocation is not supported by this browser. <br/>No notification sent. <br /> <br />";
+        }
+      }
+
+      function sendEmail(lat, lon) {
+        console.log("Trying to send an email with the lat:" + lat + " and long: " + lon)
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            bagid: bagid,
+            lat: lat,
+            lon: lon,
+            tel: document.getElementById('tel').value,
+            note: document.getElementById('note').value
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        });
+        // google.script.run.sendEmail(
+        //       document.getElementById('bagid').value, 
+        //       lat, 
+        //       lon,
+        //       document.getElementById('tel').value,
+        //       document.getElementById('note').value)
+      }
+
+      function showPosition(position) {
+        x.innerHTML = "Oh thank you!!  I hope my person comes back quickly.  You can also take me to a Lost and Found and scan the QR code again to send my location from there."
+        // x.innerHTML = "Latitude: " + position.coords.latitude + 
+        // "<br>Longitude: " + position.coords.longitude +
+        // "<br>Bag: " + document.getElementById('bagid').value;
+        sendEmail(position.coords.latitude, position.coords.longitude)
+      }
+
+      function showError(error) {
+        // x.innerHTML = x.innerHTML + "There was an error... <br />"
+        // switch(error.code) {
+        //   case error.PERMISSION_DENIED:
+        //     x.innerHTML = x.innerHTML + "User denied the request for Geolocation."
+        //     break;
+        //   case error.POSITION_UNAVAILABLE:
+        //     x.innerHTML = x.innerHTML + "Location information is unavailable."
+        //     break;
+        //   case error.TIMEOUT:
+        //     x.innerHTML = x.innerHTML + "The request to get user location timed out."
+        //     break;
+        //   case error.UNKNOWN_ERROR:
+        //     x.innerHTML = x.innerHTML + "An unknown error occurred."
+        //     break;
+        // }
+        // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
+        x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a Lost and Found?   I hope they can help."
+
+        sendEmail("", "")
+      }
+      
+      function show_hide(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-hide") == -1) {
+          x.className += " w3-hide";
+        } else {
+          x.className = x.className.replace(" w3-hide", "");
+        }
+      }
+
+    </script>
+
+  </body>
+</html>
