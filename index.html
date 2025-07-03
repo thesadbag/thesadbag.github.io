@@ -73,7 +73,7 @@
         show_hide("has-bag");
         sendEmail('', '')
       } else {
-        show_hide("nobag");
+        show_hide("no-bag");
       }
 
       function getLocation() {
@@ -89,19 +89,19 @@
 
       function sendEmail(lat, lon) {
         console.log("Trying to send an email with the lat:" + lat + " and long: " + lon)
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify({
-            bagid: bagid,
-            lat: lat,
-            lon: lon,
-            tel: document.getElementById('tel').value,
-            note: document.getElementById('note').value
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8"
-          }
-        });
+        // fetch(url, {
+        //   method: "POST",
+        //   body: JSON.stringify({
+        //     bagid: bagid,
+        //     lat: lat,
+        //     lon: lon,
+        //     tel: document.getElementById('tel').value,
+        //     note: document.getElementById('note').value
+        //   }),
+        //   headers: {
+        //     "Content-type": "application/json; charset=UTF-8"
+        //   }
+        // });
         // google.script.run.sendEmail(
         //       document.getElementById('bagid').value, 
         //       lat, 
