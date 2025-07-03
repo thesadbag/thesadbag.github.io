@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>The Sad Bag</title>
@@ -38,13 +38,13 @@
         </div>
         <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="form">
           <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
-            <p><button type="submit" class="w3-center">Send My Location to My Person!</button></p>
-  
             <p><label for="tel">Contact Number (optional):</label>
             <input type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
   
             <p><label for="note">Note (optional):</label>
             <input type="text" name="note" placeholder="Any information or &quot;Lost and Found&quot; location?" id="note" size="45"/></p>
+  
+            <p><button type="submit" class="w3-center">Send My Location to My Person!</button></p>
   
             <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
           </form>
@@ -165,7 +165,7 @@
         //     break;
         // }
         // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
-        x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; and scan the QR code again so that my person knows where I am?"
+        x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; or something?  I hope they can help!"
 
         sendEmail("", "")
       }
