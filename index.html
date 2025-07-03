@@ -13,52 +13,51 @@ l<!DOCTYPE html>
     </style>
   </head>
   <body>
-
-    <div class="w3-container" id="no-bag" style="max-width:2000px;margin-top:46px">
-
-      <!-- Not Missing Bag -->
-      <!-- Header -->
-      <div class="w3-container w3-content w3-hide" id="has-bag" style="max-width:2000px;margin-top:46px">
-  
-        <header class="w3-container w3-content w3-padding w3-center w3-opacity w3-light-grey w3-xlarge">
-          <h1 class="w3-wide">The Sad Bag</h1>
-        </header>
     
-        <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" >
+    <!-- Not Missing Bag -->
+    <!-- Header -->
+    <div class="w3-container w3-content w3-hide" id="has-bag">
+
+      <header class="w3-container w3-content w3-padding w3-center w3-opacity w3-light-grey w3-xlarge">
+        <h1 class="w3-wide">The Sad Bag</h1>
+      </header>
   
-          <div class="w3-cell w3-cell-middle w3-padding-32" id="image">
-            <img class="w3-padding" src="https://drive.google.com/thumbnail?id=1722RI6NmYmHMV-_njl8ESH7zQwSt2nQP" alt="The Sad Bag">
-          </div>
-          <div class="w3-cell" id="message">
-            <h2 class="w3-wide">I'm Lost!!!</h2>
-            <p class="w3-opacity"><i>I hope you can help me!?!!</i></p>
-            <p class="w3-justify">I'm just a small bag in a big world.  I'm very sad and lonely without my person.  Can you help me?</p>
-            <p class="w3-justify">I think my person knows I'm gone, but I need help letting them know where I am.  You can help by clicking below to let my person know exactly where I am.  (You may be asked to allow the current location to be sent to my person so they know where I am.)</p>
-          </div>
+      <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:2000px;margin-top:46px">
+
+        <div class="w3-cell w3-cell-middle w3-padding-32" id="image">
+          <img class="w3-padding" src="https://drive.google.com/thumbnail?id=1722RI6NmYmHMV-_njl8ESH7zQwSt2nQP" alt="The Sad Bag">
         </div>
-        <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="form">
-          <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
-            <p><label for="tel">Contact Number (optional):</label>
-            <input type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
-  
-            <p><label for="note">Note (optional):</label>
-            <input type="text" name="note" placeholder="Any information or &quot;Lost and Found&quot; location?" id="note" size="45"/></p>
-  
-            <p><button type="submit" class="w3-center">Send My Location to My Person!</button></p>
-  
-            <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
-          </form>
-          <p class="w3-center" id="msg"><?= msg ?><br /></p>
+        <div class="w3-cell" id="message">
+          <h2 class="w3-wide">I'm Lost!!!</h2>
+          <p class="w3-opacity"><i>I hope you can help me!?!!</i></p>
+          <p class="w3-justify">I'm just a small bag in a big world.  I'm very sad and lonely without my person.  Can you help me?</p>
+          <p class="w3-justify">I think my person knows I'm gone, but I need help letting them know where I am.  You can help by clicking below to let my person know exactly where I am.  (You may be asked to allow the current location to be sent to my person so they know where I am.)</p>
         </div>
       </div>
-      <!-- End Not Missing Bag -->
-  
-      <!-- Missing Bag -->
-      <div class="w3-container w3-content w3-hide" id="missing-bag" style="max-width:2000px;margin-top:46px">
-        <header class="w3-container w3-content w3-padding w3-center w3-opacity w3-light-grey w3-xlarge">
-          <h1 class="w3-wide">I'm Lost!</h1>
-        </header>
-  
+      <div class="w3-container w3-content w3-center w3-padding-32" style="max-width:800px" id="form">
+        <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
+          <p><label for="tel">Contact Number (optional):</label>
+          <input type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
+
+          <p><label for="note">Note (optional):</label>
+          <input type="text" name="note" placeholder="Any information or &quot;Lost and Found&quot; location?" id="note" size="45"/></p>
+
+          <p><button type="submit" class="w3-center">Send My Location to My Person!</button></p>
+
+          <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
+        </form>
+        <p class="w3-center" id="msg"><?= msg ?><br /></p>
+      </div>
+    </div>
+    <!-- End Not Missing Bag -->
+
+    <!-- Missing Bag -->
+    <div class="w3-container w3-content w3-hide" id="missing-bag">
+      <header class="w3-container w3-content w3-padding w3-center w3-opacity w3-light-grey w3-xlarge" style="max-width:2000px;margin-top:46px">
+        <h1 class="w3-wide">I'm Lost!</h1>
+      </header>
+
+      <div class="w3-container w3-content"  style="max-width:2000px;margin-top:46px">
         <p class="w3-center">I'm just a little bag in a big world without my person.  I'm scared.  Will you help me?  I think my person knows I'm gone, but you can tell them where I am by clicking the button below (you may need to approve Location Services).</p>
   
         <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
@@ -74,24 +73,25 @@ l<!DOCTYPE html>
         </form>      
         <p class="w3-center" id="demo"><?= demo ?><br /></p>
       </div>
-      <!--  End Missing Bag -->
-      
-      <!-- No Bag -->
-      <div class="w3-container w3-content w3-hide" id="no-bag" style="max-width:2000px;margin-top:46px">
-        <header class="w3-container w3-content w3-padding w3-center w3-opacity w3-light-grey w3-xlarge">
-          <h1 class="w3-wide">The Sad Bag</h1>
-        </header>
-  
+    </div>
+    <!--  End Missing Bag -->
+    
+    <!-- No Bag -->
+    <div class="w3-container w3-content w3-hide" id="no-bag"">
+      <header class="w3-container w3-content w3-padding w3-center w3-opacity w3-light-grey w3-xlarge">
+        <h1 class="w3-wide">The Sad Bag</h1>
+      </header>
+      <div style="max-width:2000px;margin-top:46px">
         <h2 class="w3-center">Yep, you scanned a QR Code!!!</h2>
       </div>
-      <!-- End No Bag -->    
-  
-      <!-- Footer -->
-      <footer class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
-        <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-        <p class="w3-medium">&copy; Copyright 2024-2025, The Sad Bag</p>
-      </footer>
     </div>
+    <!-- End No Bag -->    
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
+      <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+      <p class="w3-medium">&copy; Copyright 2024-2025, The Sad Bag</p>
+    </footer>
     
     <script>
       const x = document.getElementById("msg");
