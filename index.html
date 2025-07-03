@@ -66,7 +66,7 @@
     <script>
       const x = document.getElementById("msg");
       const url = "";
-      const searchParams = new URLSearchParams(window.location.search);
+      let searchParams = new URLSearchParams(window.location.search);
 
       if (searchParams.has("bagid")) {
         const bagid = searchParams.get("bagid");
@@ -111,7 +111,7 @@
       }
 
       function showPosition(position) {
-        x.innerHTML = "Oh thank you!!  I hope my person comes back quickly.  You can also take me to a Lost and Found and scan the QR code again to send my location from there."
+        x.innerHTML = "Oh thank you!!  I hope my person comes back quickly.  You can also take me to a &quot;Lost and Found&quot; and scan the QR code again to send my location from there."
         // x.innerHTML = "Latitude: " + position.coords.latitude + 
         // "<br>Longitude: " + position.coords.longitude +
         // "<br>Bag: " + document.getElementById('bagid').value;
@@ -135,7 +135,7 @@
         //     break;
         // }
         // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
-        x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a Lost and Found?   I hope they can help."
+        x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; and scan the QR code again so that my person knows where I am?"
 
         sendEmail("", "")
       }
