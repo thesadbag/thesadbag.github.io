@@ -66,9 +66,9 @@
     <script>
       const x = document.getElementById("msg");
       const url = "";
-      const searchParams = new URLSearchParams(location.search);
+      const searchParams = new URLSearchParams(window.location.search);
 
-      if searchParams.has("bagid") {
+      if (searchParams.has("bagid")) {
         const bagid = searchParams.get("bagid");
         show_hide("has-bag");
         sendEmail('', '')
