@@ -101,7 +101,8 @@ l<!DOCTYPE html>
       if (searchParams.has("bagid")) {
         const bagid = searchParams.get("bagid");
         show_hide("has-bag");
-        sendEmail('', '')
+        // sendEmail('', '')
+        contactServer({bagid: bagid});
       } else {
         show_hide("no-bag");
       }
@@ -117,21 +118,43 @@ l<!DOCTYPE html>
         }
       }
 
+      function contactServer(json_struct){
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            bagid: bagid,
+            lat: lat,
+            lon: lon,
+            tel: document.getElementById('tel').value,
+            note: document.getElementById('note').value
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        }).then(response => response.json()).then(data => {fetchResponse(data)})
+      }
+
+      function fetchResponse(data){
+        console.log(data)
+
+        if (data.bagid == -1) {
+          show_hide('no-bag')
+        }
+        if (data.lost) {
+          show_hide('has-bag')
+        } else {
+          show_hide('missing-bag')
+        }      
+      }
+      
       function sendEmail(lat, lon) {
         console.log("Trying to send an email with the lat:" + lat + " and long: " + lon)
-        // fetch(url, {
-        //   method: "POST",
-        //   body: JSON.stringify({
-        //     bagid: bagid,
-        //     lat: lat,
-        //     lon: lon,
-        //     tel: document.getElementById('tel').value,
-        //     note: document.getElementById('note').value
-        //   }),
-        //   headers: {
-        //     "Content-type": "application/json; charset=UTF-8"
-        //   }
-        // });
+        contactServer({bagid: bagid, 
+                       lat: lat,
+                       lon: lon,
+                       tele: document.getElementById('tel').value, 
+                       note: document.getElementById('note').value,
+                       action, 'sendEmail')
         // google.script.run.sendEmail(
         //       document.getElementById('bagid').value, 
         //       lat, 
