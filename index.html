@@ -131,13 +131,13 @@ l<!DOCTYPE html>
         for (const [key, value] of Object.entries(json_struct)) {
           get_string += "&" + key + "=" + value 
         }
-        get_string[0] = '?'
+        get_string = '?' + get_string.substring(1, get_string.length)
         console.log(get_string)
         
-        fetch(URL + get_string, {
+        fetch(url + get_string, {
           method: "GET",
           headers: {
-            "Content-type": "text/plain; charset=UTF-8"
+            "Content-type": "application/json; charset=UTF-8"
           }
         }).then(response => response.json()).then(data => {fetchResponse(data)})
       }
