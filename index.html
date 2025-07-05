@@ -124,7 +124,7 @@ l<!DOCTYPE html>
           method: "POST",
           body: JSON.stringify(json_struct),
           headers: {
-            "Content-type": "application/json; charset=UTF-8"
+            "Content-type": "text/plain; charset=UTF-8"
           }
         }).then(response => response.json()).then(data => {fetchResponse(data)})
       }
