@@ -143,7 +143,7 @@ l<!DOCTYPE html>
       
       function sendEmail(lat='', lon='') {
         console.log("Trying to send an email with the lat:" + lat + " and long: " + lon)
-        contactServer({bagid: bagid_num, 
+        contactServer({bagid: searchParams.get("bagid"), 
                        lat: lat,
                        lon: lon,
                        tele: document.getElementById('tel').value, 
