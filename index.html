@@ -58,20 +58,29 @@ l<!DOCTYPE html>
       </header>
 
       <div class="w3-container w3-content"  style="max-width:2000px;margin-top:46px">
-        <p class="w3-center">I'm just a little bag in a big world without my person.  I'm scared.  Will you help me?  I think my person knows I'm gone, but you can tell them where I am by clicking the button below (you may need to approve Location Services).</p>
+        <p class="w3-center">This bag is lost.  Click the button below to notify the owner.</p>
+  
+        <p class="w3-center" id="reward" ><?= reward ?></p>
+  
+        <p class="w3-center" id="telenum" ><?= telenum ?></p>
+  
+        <p class="w3-center" id="misc" ><?= misc ?></p>
   
         <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
-          <button type="submit" class="w3-center">Send My Location to My Person!</button><br />
+          <button type="submit" class="w3-center">Bag is Here</button><br />
   
           <label for="tel">Contact Number (optional)</label>
           <input type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/> <br />
   
           <label for="note">Note (optional)</label>
-          <input type="text" name="note" placeholder="Any information or lost 'n' found location?" id="note" size="45"/> <br />
+          <input type="text" name="note`" placeholder="Any information or &quot;Lost and Found&quot; location?" id="note" size="45"/> <br />
   
           <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
-        </form>      
+        </form>
+        
+  
         <p class="w3-center" id="demo"><?= demo ?><br /></p>
+  
       </div>
     </div>
     <!--  End Missing Bag -->
