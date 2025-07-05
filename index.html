@@ -22,16 +22,17 @@
         <h1 class="w3-wide">The Sad Bag</h1>
       </header>
   
-      <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px">
 
         <h2 class="w3-center w3-wide">I'm Lost!!!</h2>
-        <div class="w3-cell w3-cell-middle w3-padding-32" id="image">
+        <p class="w3-opacity w3-center"><i>I hope you can help me!?!!</i></p>
+        <div class="w3-cell w3-cell-middle" id="image">
           <img class="w3-padding" src="https://drive.google.com/thumbnail?id=1722RI6NmYmHMV-_njl8ESH7zQwSt2nQP" alt="The Sad Bag">
         </div>
         <div class="w3-cell" id="message">
-          <p class="w3-opacity"><i>I hope you can help me!?!!</i></p>
           <p class="w3-justify">I'm just a small bag in a big world.  I'm very sad and lonely without my person.  Can you help me?</p>
           <p class="w3-justify">I think my person knows I'm gone, but I need help letting them know where I am.  You can help by clicking below to let my person know exactly where I am.  (You may be asked to allow the current location to be sent to my person so they know where I am.)</p>
+          <p class="w3-justify">You can also add your contact information and a note if you wish, but you don't have to.</p>
           <form class="w3-center" name="notifier" action="javascript:void(0)" onsubmit="getLocation()">
             <p><label for="tel">Contact Number (optional):</label>
             <input type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
@@ -43,14 +44,14 @@
   
             <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
           </form>
-          <div class="w3-container w3-hide" id="contact-info">
-            <h3 class="w3-center">My Person's Contact Information</h3>
-            <p class="w3-center" id="owner-number"></p>
-            <p class="w3-center w3-hide" id="reward"></p>
-            <p class="w3-center w3-hide" id="misc"></p>
-        </div>
         <p class="w3-center" id="msg"><?= msg ?><br /></p>
       </div>
+      <div class="w3-container w3-hide" id="contact-info">
+        <h3 class="w3-center">My Person's Contact Information</h3>
+        <p class="w3-center" id="owner-number"></p>
+        <p class="w3-center w3-hide" id="reward"></p>
+        <p class="w3-center w3-hide" id="misc"></p>
+    </div>
     </div>
     <!-- End Missing Bag -->
 
@@ -61,7 +62,7 @@
       </header>
       <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
         <h2 class="w3-center">What is this page?</h2>
-        <p class="w3-justify">The Sad Bag is a baggage tag that may be scanned by a smart device (phone) to let the owner know the bag has been found.  This system does two things: One, it notifies the bag owner that the bag's QR Code has been scanned.  And two, it is capable of notifying the owner where the tag was scanned (this does require the person scanning the tag to allow location services to be used).</p>
+        <p class="w3-justify">The Sad Bag is a baggage tag that may be scanned by a smart device (phone) to let the owner know the bag has been found.  This system does two things: First, it notifies the bag owner that the bag's QR Code has been scanned.  And second, it can notify the owner where the tag was scanned (this does require the person scanning the tag to allow location services to be used).</p>
       </div>
     </div>
     <!-- End No Bag -->    
