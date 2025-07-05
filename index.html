@@ -139,7 +139,7 @@ l<!DOCTYPE html>
           headers: {
             "Content-type": "text/plain; charset=UTF-8"
           }
-        }).then(response => {console.log(response); response.json()}).then(data => {fetchResponse(data)})
+        }).then(response => response.text()).then(data => {fetchResponse(data)})
       }
 
       function fetchResponse(data){
