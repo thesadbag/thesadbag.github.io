@@ -120,9 +120,21 @@ l<!DOCTYPE html>
 
       function contactServer(json_struct){
         console.log(JSON.stringify(json_struct))
-        fetch(url, {
+        // fetch(url, {
+        //   method: "POST",
+        //   body: JSON.stringify(json_struct),
+        //   headers: {
+        //     "Content-type": "text/plain; charset=UTF-8"
+        //   }
+        // }).then(response => response.json()).then(data => {fetchResponse(data)})
+        var get_string = ''
+        for (const [key, entry] of json_struct.entries()) {
+          get_string += "&" + key + "=" + entry 
+        }
+        get_string[0] = '?'
+        
+        fetch(URL + get_string, {
           method: "GET",
-          body: JSON.stringify(json_struct),
           headers: {
             "Content-type": "text/plain; charset=UTF-8"
           }
