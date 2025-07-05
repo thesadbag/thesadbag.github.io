@@ -128,10 +128,11 @@ l<!DOCTYPE html>
         //   }
         // }).then(response => response.json()).then(data => {fetchResponse(data)})
         var get_string = ''
-        for (const [key, entry] of json_struct.entries()) {
-          get_string += "&" + key + "=" + entry 
+        for (const [key, value] of Object.entries(json_struct)) {
+          get_string += "&" + key + "=" + value 
         }
         get_string[0] = '?'
+        console.log(get_string)
         
         fetch(URL + get_string, {
           method: "GET",
