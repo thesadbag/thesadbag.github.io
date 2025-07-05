@@ -78,7 +78,7 @@ l<!DOCTYPE html>
       let searchParams = new URLSearchParams(window.location.search);
 
       if (searchParams.has("bagid")) {
-        const bagid = searchParams.get("bagid");
+        const bagid_num = searchParams.get("bagid");
         show_hide("has-bag");
         sendEmail();
       } else {
@@ -143,7 +143,7 @@ l<!DOCTYPE html>
       
       function sendEmail(lat='', lon='') {
         console.log("Trying to send an email with the lat:" + lat + " and long: " + lon)
-        contactServer({bagid: bagid, 
+        contactServer({bagid: bagid_num, 
                        lat: lat,
                        lon: lon,
                        tele: document.getElementById('tel').value, 
