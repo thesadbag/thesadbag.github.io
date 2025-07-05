@@ -121,7 +121,7 @@ l<!DOCTYPE html>
       function contactServer(json_struct){
         console.log(JSON.stringify(json_struct))
         fetch(url, {
-          method: "POST",
+          method: "GET",
           body: JSON.stringify(json_struct),
           headers: {
             "Content-type": "text/plain; charset=UTF-8"
