@@ -131,11 +131,11 @@ l<!DOCTYPE html>
         }
         if (data.lost == "TRUE") {
           document.getElementById('owner-number').innerText = 'Telephone Number: ' + data.tele
-          if (length(data.reward) > 0){
+          if (data.reward.length > 0){
             document.getElementById('reward').innerText = 'Reward:' + data.reward
             show-hide('reward')
           }
-          if (length(data.misc) > 0) {
+          if (data.misc.length > 0) {
             document.getElementById('misc').innerText = data.misc
             show-hide('misc')
           }
