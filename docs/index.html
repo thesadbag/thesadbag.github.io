@@ -132,7 +132,9 @@
           show_hide('no-bag')
         }
         if (data.lost == "TRUE") {
-          document.getElementById('owner-number').innerText = 'Telephone Number: ' + data.tele
+          if (data.tel.length > 0){
+            document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
+          }
           if (data.reward.length > 0){
             document.getElementById('reward').innerText = 'Reward: ' + data.reward
             show_hide('reward')
@@ -145,13 +147,15 @@
         }
       }
       
-      function sendEmail(lat='', lon='') {
-        console.log("Trying to send an email with the lat:" + lat + " and long: " + lon)
+      function sendEmail(lat='', lon='', note='') {
+        if (note == ''){
+          note = document.getElementById('note').value
+        }
         contactServer({bagid: searchParams.get("bagid"), 
                        lat: lat,
                        lon: lon,
                        tele: document.getElementById('tel').value, 
-                       note: document.getElementById('note').value,
+                       note: note,
                        action: 'sendEmail'})
       }
 
@@ -182,7 +186,7 @@
         // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
         x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; or something?  I hope they can help!"
 
-        sendEmail("", "")
+        sendEmail("", "", "Error getting the current position from scanning device.")
       }
       
       function show_hide(id) {
