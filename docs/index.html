@@ -3,7 +3,7 @@
   <head>
     <title>The Sad Bag</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, min-height=devie-height initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -12,7 +12,7 @@
       .mySlides {display: none}
     </style>
   </head>
-  <body>
+  <body style="height=100vh">
     
     <!-- Missing Bag -->
     <!-- Header -->
@@ -42,9 +42,9 @@
   
             <p><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-button-block w3-button-rounder w3-ripple">Send My Location to My Person!</button></p>
   
-            <input type="hidden" id="bagid" name="bagid" value="<?= bagid ?>" />
+            <input type="hidden" id="bagid" name="bagid" value="" />
           </form>
-          <p class="w3-center" id="msg"><?= msg ?><br /></p>
+          <p class="w3-center" id="msg"<br /></p>
         </div>
         <div class="w3-container w3-hide" id="contact-info">
           <h3 class="w3-center">My Person's Contact Information</h3>
@@ -66,8 +66,35 @@
         <p class="w3-justify">The Sad Bag is a baggage tag that may be scanned by a smart device (phone) to let the owner know the bag has been found.  This system does two things: First, it notifies the bag owner that the bag's QR Code has been scanned.  And second, it can notify the owner where the tag was scanned (this does require the person scanning the tag to allow location services to be used).</p>
       </div>
     </div>
-    <!-- End No Bag -->    
+    <!-- End No Bag -->
 
+    <!-- Update -->
+    <div class=" ">
+      <header class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
+        <h1 class="w3-wide">The Sad Bag</h1>
+      </header>
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
+        <h2 class="w3-center">Update Information</h2>
+        <p class="w3-justify">Use this page to update the information for your bag tag.</p>
+        <div class="card">
+          <header>
+            <h4 id="bag_name"></h4>
+          </header>
+          <p><label>Telephone Number :</label>
+            <input class="w3-input w3-border" id="tele_update" type="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$" /></p>
+          <p><label>Reward :</label>
+            <input class="w3-input w3-border" id="reward_update" type="text" /></p>
+          <p><label>Misc :</label>
+            <textarea class="w3-input w3-border" id="misc_update"></textarea></p>
+          <p><input class="w3-check" id="lost_update" type="checkbox"> <label>Bag is Lost (Show telephone number, reward, and misc fields): </label></p>
+          <input type="hidden" id="bagid_update" name="bagid_update" value="" />
+          <input type="hidden" id="uuid_update" name="uuid_update" value="" />
+          <p><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-button-block w3-button-rounder w3-ripple">Update</button></p>
+        </div>
+      </div>
+    </div>
+    <!-- End Update -->
+      
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
       <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
@@ -76,11 +103,19 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbzetPHdgR4G-Xx2wb-gspC7KKIsYIXLlhb9Met0AH2VVcrL7vt56FDbQ40DUIuK807F/exec";
+      const url = "https://script.google.com/macros/s/AKfycbzorUeRmkgszRzhS5CX_kkBgEaRDOVUVV9St7EV7nt56lCsFd0nRVbV0ylsDniQeyGa/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
-      if (searchParams.has("bagid")) {
+      if (searchParams.has("uuid")) {
+        document.getElementById("bagid_update").value = searchParams.bagid
+        document.getElementById("uuid_update").value = searchParams.uuid
+        document.getElementById("tel_update").value = searchParams.tel
+        document.getElementById("reward_update").value = searchParams.reward
+        document.getElementById("misc_update").innerText = searchParams.misc
+        document.getElementById("lost_update").checked = searchParams.lost
+      } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
+        document.getElementById("bagid").value = bagid_num
         show_hide("has-bag");
         sendEmail();
       } else {
