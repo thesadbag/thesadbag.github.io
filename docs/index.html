@@ -170,7 +170,7 @@
         data = JSON.parse(data)
         console.log(data)
 
-        if ("uuid" in data)){
+        if (data.has("uuid")){
       		document.getElementById("tele_update").value = data.tele
           document.getElementById("reward_update").value = data.reward
           document.getElementById("misc_update").innerText = data.misc
