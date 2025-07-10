@@ -80,16 +80,21 @@
           <header>
             <h4 id="bag_name"></h4>
           </header>
-          <p><label>Telephone Number :</label>
-            <input class="w3-input w3-border" id="tele_update" type="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$" /></p>
-          <p><label>Reward :</label>
-            <input class="w3-input w3-border" id="reward_update" type="text" /></p>
-          <p><label>Misc :</label>
-            <textarea class="w3-input w3-border" id="misc_update"></textarea></p>
-          <p><input class="w3-check" id="lost_update" type="checkbox"> <label>Bag is Lost (Show telephone number, reward, and misc fields): </label></p>
-          <input type="hidden" id="bagid_update" name="bagid_update" value="" />
-          <input type="hidden" id="uuid_update" name="uuid_update" value="" />
-          <p><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-button-block w3-button-rounder w3-ripple">Update</button></p>
+          <form class="" name="updater" action="https://thesadbag.com">
+            <p><label>Telephone Number :</label>
+              <input class="w3-input w3-border" id="tele_update" type="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$" /></p>
+            <p><label>Reward :</label>
+              <input class="w3-input w3-border" id="reward_update" type="text" /></p>
+            <p><label>Misc :</label>
+              <textarea class="w3-input w3-border" id="misc_update"></textarea></p>
+            <p><input class="w3-check" id="lost_update" type="checkbox"> <label>Bag is Lost (Show telephone number, reward, and misc fields): </label></p>
+            <input type="hidden" id="bagid_update" name="bagid_update" value="" />
+            <input type="hidden" id="uuid_update" name="uuid_update" value="" />
+            <p class="w3-center w3-block"><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-block w3-button-rounder w3-ripple">Update</button></p>
+          </form>
+        </div>
+        <div id="update_panel" class="w3-container w3-panel w3-blue w3-center w3-hide">
+          <p id="msg_update"></p>
         </div>
       </div>
     </div>
@@ -112,7 +117,9 @@
         document.getElementById("tel_update").value = searchParams.tel
         document.getElementById("reward_update").value = searchParams.reward
         document.getElementById("misc_update").innerText = searchParams.misc
-        document.getElementById("lost_update").checked = searchParams.lost
+        document.getElementById("lost_update").checked = searchParams.lost == "TRUE"
+        contactServer({uuid: searchParams.uuid, action: 'update')
+        
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
@@ -163,22 +170,30 @@
         data = JSON.parse(data)
         console.log(data)
 
-        if (data.bagid == -1) {
-          show_hide('no-bag')
-        }
-        if (data.lost == "TRUE") {
-          if (data.tel.length > 0){
-            document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
+        if (data.hasProperty("uuid")){
+      		document.getElementById("tele_update").value = data.tele
+          document.getElementById("reward_update").value = data.reward
+          document.getElementById("misc_update").innerText = data.misc
+          document.getElementById("lost_update").checked = data.lost == "TRUE"
+        } else {
+
+          if (data.bagid == -1) {
+            show_hide('no-bag')
           }
-          if (data.reward.length > 0){
-            document.getElementById('reward').innerText = 'Reward: ' + data.reward
-            show_hide('reward')
+          if (data.lost == "TRUE") {
+            if (data.tel.length > 0){
+              document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
+            }
+            if (data.reward.length > 0){
+              document.getElementById('reward').innerText = 'Reward: ' + data.reward
+              show_hide('reward')
+            }
+            if (data.misc.length > 0) {
+              document.getElementById('misc').innerText = data.misc
+              show_hide('misc')
+            }
+            show_hide('contact-info')
           }
-          if (data.misc.length > 0) {
-            document.getElementById('misc').innerText = data.misc
-            show_hide('misc')
-          }
-          show_hide('contact-info')
         }
       }
       
