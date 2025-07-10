@@ -118,7 +118,7 @@
         document.getElementById("reward_update").value = searchParams.reward
         document.getElementById("misc_update").innerText = searchParams.misc
         document.getElementById("lost_update").checked = searchParams.lost == "TRUE"
-        contactServer({uuid: searchParams.uuid, action: 'update')
+        contactServer({uuid: searchParams.uuid, action: 'update'})
         
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
