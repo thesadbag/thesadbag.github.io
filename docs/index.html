@@ -112,6 +112,8 @@
       let searchParams = new URLSearchParams(window.location.search);
 
       if (searchParams.has("uuid")) {
+        console.log("loading...")
+        console.log(window.location.search)
         console.log(searchParams.keys())
         document.getElementById("bagid_update").value = searchParams.bagid
         document.getElementById("uuid_update").value = searchParams.uuid
@@ -119,7 +121,7 @@
         document.getElementById("reward_update").value = searchParams.reward
         document.getElementById("misc_update").innerText = searchParams.misc
         document.getElementById("lost_update").checked = searchParams.lost == "TRUE"
-        contactServer({uuid: searchParams.uuid, action: 'update'})
+        contactServer({uuid: "16cf0151-6e1c-4a2b-8f3b-740074624520", action: 'update'})
         
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
