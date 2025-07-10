@@ -112,6 +112,7 @@
       let searchParams = new URLSearchParams(window.location.search);
 
       if (searchParams.has("uuid")) {
+        console.log(searchParams)
         document.getElementById("bagid_update").value = searchParams.bagid
         document.getElementById("uuid_update").value = searchParams.uuid
         document.getElementById("tele_update").value = searchParams.tel
