@@ -75,12 +75,12 @@
           <header>
             <h4 id="bag_name"></h4>
           </header>
-          <form class="" name="updater" action="https://thesadbag.com">
-            <p><label>Telephone Number :</label>
-              <input class="w3-input w3-border" id="tele_update" type="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$" /></p>
-            <p><label>Reward :</label>
-              <input class="w3-input w3-border" id="reward_update" type="text" /></p>
-            <p><label>Misc :</label>
+          <form class="" name="updater" action="javascript:void(0)" onsubmit="sendUpdate()">
+            <p><label for="tele_update">Telephone Number :</label>
+              <input class="w3-input w3-border" id="tele_update" name="tele" type="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$" /></p>
+            <p><label for="reward_update">Reward :</label>
+              <input class="w3-input w3-border" id="reward_update" name="reward" type="text" /></p>
+            <p><label for="misc_update">Misc :</label>
               <textarea class="w3-input w3-border" id="misc_update" name="misc"></textarea></p>
             <p><input class="w3-check" id="lost_update" name="lost" type="checkbox"> <label>Bag is Lost (Show telephone number, reward, and misc fields): </label></p>
             <input type="hidden" id="bagid_update" name="bagid" value="" />
@@ -168,6 +168,8 @@
           document.getElementById("misc_update").innerText = data.misc
           document.getElementById("lost_update").checked = data.lost == "TRUE"
           show_hide("update")
+        } else if ("success" in data){
+          document.getElementById("msg_update").innerText = data.success == 1 ? "Update succeeded" : "Update failed"
         } else {
 
           if (data.bagid == -1) {
@@ -201,6 +203,14 @@
                        note: note,
                        action: 'sendEmail'})
       }
+
+      function sendUpdate() {
+        contactServer({uuid: document.getElementById("uuid_update").value,
+                       action: "updateData",
+                       tele: document.getElementById("tele_update").value,
+                       reward: document.getElementById("reward_update").value,
+                       misc: document.getElementById("misc_update").innerText,
+                       lost: document.getElementById("lost_update").ischecked})
 
       function showPosition(position) {
         x.innerHTML = "Oh thank you!!  I hope my person comes back quickly.  You can also take me to a &quot;Lost and Found&quot; and scan the QR code again to send my location from there."
