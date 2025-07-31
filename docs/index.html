@@ -139,11 +139,10 @@
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
-        show_hide("has-bag");
         sendEmail();
       } else {
       	hide("loading");
-        show_hide("no-bag");
+        show("no-bag");
       }
 
       function getLocation() {
@@ -197,13 +196,12 @@
           document.getElementById("reward_update").value = data.reward
           document.getElementById("misc_update").innerText = data.misc
           document.getElementById("lost_update").checked = data.lost == "TRUE"
-          show_hide("update")
+          show("update")
         } else if ("success" in data){
           document.getElementById("msg_update").innerText = data.success == 1 ? "Update succeeded" : "Update failed"
         } else {
 
           if (data.bagid == -1) {
-            hide("loading")
             show('no-bag')
           } else {
             if (data.lost == "TRUE") {
@@ -212,11 +210,11 @@
               }
               if (data.reward.length > 0){
                 document.getElementById('reward').innerText = 'Reward: ' + data.reward
-                show_hide('reward')
+                show('reward')
               }
               if (data.misc.length > 0) {
                 document.getElementById('misc').innerText = data.misc
-                show_hide('misc')
+                show('misc')
               }
               show('contact-info')
             }
