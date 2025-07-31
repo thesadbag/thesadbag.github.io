@@ -27,10 +27,10 @@
 
         <h2 class="w3-center w3-wide">I'm Lost!!!</h2>
         <p class="w3-opacity w3-center"><i>I hope you can help me!?!!</i></p>
-        <div class="w3-row w3-cell-middle" id="image">
+        <div class="w3-third w3-cell-middle" id="image">
           <img class="w3-padding" src="sadbag.png" alt="The Sad Bag">
         </div>
-        <div class="w3-row" id="message">
+        <div class="w3-twothird" id="message">
           <p class="w3-justify">I'm just a small bag in a big world.  I'm very sad and lonely without my person.  Can you help me?</p>
           <p class="w3-justify">I think my person knows I'm gone, but I need help letting them know where I am.  You can help by clicking below to let my person know exactly where I am.  (You may be asked to allow the current location to be sent to my person so they know where I am.)</p>
           <p class="w3-justify">You can also add your contact information and a note if you wish, but you don't have to.</p>
@@ -45,7 +45,7 @@
   
             <input type="hidden" id="bagid" name="bagid" value="" />
           </form>
-          <p class="w3-center" id="msg"<br /></p>
+          <p class="w3-center" id="msg"><br /></p>
         </div>
         <div class="w3-container w3-hide" id="contact-info">
           <h3 class="w3-center">My Person's Contact Information</h3>
@@ -58,10 +58,31 @@
     <!-- End Missing Bag -->
 
     <!-- No Bag -->
-    <div class=" w3-hide" id="no-bag"">
-      <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
-        <h2 class="w3-center">What is this page?</h2>
-        <p class="w3-justify">The Sad Bag is a baggage tag that may be scanned by a smart device (phone) to let the owner know the bag has been found.  This system does two things: First, it notifies the bag owner that the bag's QR Code has been scanned.  And second, it can notify the owner where the tag was scanned (this does require the person scanning the tag to allow location services to be used).</p>
+    <div class=" w3-hide" id="no-bag">
+
+  
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px">
+
+          <div class="w3-third w3-cell-middle" id="image">
+          <img class="w3-padding" src="sadbag.png" alt="The Sad Bag">
+        </div>
+        <div class="w3-twothird" id="message">
+          <h2 class="w3-center w3-wide">The Sad Bag</h2>
+          <p class="w3-opacity w3-center"><i>Did you find a bag?</i></p>
+          <p class="w3-justify">Sad Bags are bags that are missing their person.  Did you find one?  You can scan the QR Code or enter the bag number here to help this Sad Bag find it's person.</p>
+          <form class="w3-center" name="alt-notifier" action="javascript:void(0)" onSubmit="sendBagID()">
+            <p><label for="man_bag_id">Sad Bag ID Number:</label>
+            <input type="tel" id="man_bag_id" placeholder="XXX" title="Telephone number" name="man_bag_id" /></p>  
+            <p class="w3-center w3-block"><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-block w3-button-rounder w3-ripple">Send Bag ID</button>
+          </form>
+          <p class="w3-center" id="msg"><br /></p>
+        </div>
+        <div class="w3-container w3-hide" id="contact-info">
+          <h3 class="w3-center">My Person's Contact Information</h3>
+          <p class="w3-center" id="owner-number"></p>
+          <p class="w3-center w3-hide" id="reward"></p>
+          <p class="w3-center w3-hide" id="misc"></p>
+        </div>
       </div>
     </div>
     <!-- End No Bag -->
@@ -103,7 +124,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbxnGltiMxhxt6sXxJNI561eIxv_6OPy4AhIJNLUVQ1DPHFw5kTwvqJdRbNyZV2sDPNM/exec";
+      const url = "https://script.google.com/macros/s/AKfycbx1GFIw4HjaAQdd0sLLJJBMjdss9ey5Z1j2e-CDR_52Sg5rJn3VhpSpAfFLWvKCuV-a/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
       if (searchParams.has("uuid")) {
@@ -163,7 +184,7 @@
           document.getElementById("bagid_update").value = data.bagid
           document.getElementById("uuid_update").value = data.uuid
           document.getElementById("bag_name").value = data.desc
-      		document.getElementById("tele_update").value = data.tele
+          document.getElementById("tele_update").value = data.tele
           document.getElementById("reward_update").value = data.reward
           document.getElementById("misc_update").innerText = data.misc
           document.getElementById("lost_update").checked = data.lost == "TRUE"
@@ -196,12 +217,19 @@
         if (note == ''){
           note = document.getElementById('note').value
         }
-        contactServer({bagid: searchParams.get("bagid"), 
+        contactServer({bagid: document.getElementById("bagid").value, 
                        lat: lat,
                        lon: lon,
                        tele: document.getElementById('tel').value, 
                        note: note,
                        action: 'sendEmail'})
+      }
+      
+      function sendBagID() {
+        document.getElementById("bagid").value = document.getElementById("man_bag_id").value
+        show_hide('no-bag')
+        show_hide("has-bag");
+        sendEmail();
       }
 
       function sendUpdate() {
