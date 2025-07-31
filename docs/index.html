@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=forward_media" />
     <style>
       body {font-family: "Lato", sans-serif}
       .mySlides {display: none}
@@ -14,12 +15,20 @@
   </head>
   <body style="height=100vh">
     
+    <!-- Header -->
     <header class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
       <h1 class="w3-wide">The Sad Bag</h1>
     </header>
+    
+    <!-- Loading -->
+    <div class="w3-center" id="loading">
+      <span class="material-symbols-outlined w3-spin">
+        forward_media
+      </span>
+    </div>
+    <!-- End Loading -->
 
     <!-- Missing Bag -->
-    <!-- Header -->
     <div class=" w3-hide" id="has-bag">
 
   
@@ -28,7 +37,7 @@
         <h2 class="w3-center w3-wide">I'm Lost!!!</h2>
         <p class="w3-opacity w3-center"><i>I hope you can help me!?!!</i></p>
         <div class="w3-third w3-cell-middle" id="image">
-          <img class="w3-padding" src="sadbag.png" alt="The Sad Bag">
+          <img class="w3-padding" src="https://thesadbag.com/sadbag.png" alt="The Sad Bag" style="max-width: 400px">
         </div>
         <div class="w3-twothird" id="message">
           <p class="w3-justify">I'm just a small bag in a big world.  I'm very sad and lonely without my person.  Can you help me?</p>
@@ -64,7 +73,7 @@
       <div class="w3-container w3-content w3-padding-32" style="max-width:800px">
 
           <div class="w3-third w3-cell-middle" id="image">
-          <img class="w3-padding" src="sadbag.png" alt="The Sad Bag">
+          <img class="w3-padding" src="https://thesadbag.com/sadbag.png" alt="The Sad Bag" style="max-width: 200px">
         </div>
         <div class="w3-twothird" id="message">
           <h2 class="w3-center w3-wide">The Sad Bag</h2>
@@ -124,7 +133,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbx1GFIw4HjaAQdd0sLLJJBMjdss9ey5Z1j2e-CDR_52Sg5rJn3VhpSpAfFLWvKCuV-a/exec";
+      const url = "https://script.google.com/macros/s/AKfycbxnGltiMxhxt6sXxJNI561eIxv_6OPy4AhIJNLUVQ1DPHFw5kTwvqJdRbNyZV2sDPNM/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
       if (searchParams.has("uuid")) {
@@ -136,6 +145,7 @@
         show_hide("has-bag");
         sendEmail();
       } else {
+      	hide("loading");
         show_hide("no-bag");
       }
 
@@ -180,6 +190,8 @@
         data = JSON.parse(data)
         console.log(data)
 
+        hide('loading')
+        
         if ("uuid" in data){
           document.getElementById("bagid_update").value = data.bagid
           document.getElementById("uuid_update").value = data.uuid
@@ -276,6 +288,20 @@
         if (x.className.indexOf("w3-hide") == -1) {
           x.className += " w3-hide";
         } else {
+          x.className = x.className.replace(" w3-hide", "");
+        }
+      }
+
+      function hide(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-hide") == -1) {
+          x.className += " w3-hide";
+        }
+      }
+
+      function show_hide(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-hide") != -1) {
           x.className = x.className.replace(" w3-hide", "");
         }
       }
