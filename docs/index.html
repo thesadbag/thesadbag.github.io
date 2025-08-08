@@ -122,6 +122,36 @@
     </div>
     <!-- End Update -->
       
+    <!-- Register -->
+    <div id="register" class=" w3-hide">
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
+        <h2 class="w3-center">Register Bag Tag</h2>
+        <div class="card">
+          <header>
+            <h4 class="w3-center" id="bagid_register">Bag Tag Number</h4>
+          </header>
+          <form class="" name="register" action="javascript:void(0)" onsubmit="register()">
+            <p><label for="tele_register">Telephone Number :</label>
+              <input class="w3-input w3-border" id="tele_register" name="tele_registar" type="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$" /></p>
+            <p><label for="email_registar">Email Address :</label>
+              <input class="w3-input w3-border" id="email_registar" name="reward" type="text" /></p>
+            <p><label for="reward_register">Reward :</label>
+              <input class="w3-input w3-border" id="reward_register" name="reward_register" type="text" /></p>
+            <p><label for="misc_register">Misc :</label>
+              <textarea class="w3-input w3-border" id="misc_register" name="misc"></textarea></p>
+            <p><label>Bag is Lost (Show telephone number, reward, and misc fields): </label><input class="w3-check" id="lost_register" name="lost_register" type="checkbox"></p>
+            <input type="hidden" id="bagid_update" name="bagid" value="" />
+            <input type="hidden" id="uuid_update" name="uuid" value="" />
+            <p class="w3-center w3-block"><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-block w3-button-rounder w3-ripple">Register</button></p>
+          </form>
+        </div>
+        <div id="register_panel" class="w3-container w3-panel w3-blue w3-center w3-hide">
+          <p id="msg_register"></p>
+        </div>
+      </div>
+    </div>
+    <!-- End Register -->
+      
     <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
       <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
@@ -132,7 +162,7 @@
       const x = document.getElementById("msg");
       const url = "https://script.google.com/macros/s/AKfycbxFwOgOb2jGLvIbECsFObXP-E6RTFBBSFO4cIaSxmOHT8tkOWYouy1-xW91LKRcVfZr/exec";
       let searchParams = new URLSearchParams(window.location.search);
-
+      
       if (searchParams.has("uuid")) {
         contactServer({uuid: searchParams.get("uuid"), action: 'update'})
         
@@ -203,6 +233,8 @@
 
           if (data.bagid == -1) {
             show('no-bag')
+          } else if (data.bagid == -2 ) {
+            show("register")
           } else {
             if (data.lost == "TRUE") {
               if (data.tel.length > 0){
@@ -241,6 +273,10 @@
         hide("has-bag")
         show("loading")      
         sendEmail();
+      }
+      
+      function register() {
+      
       }
 
       function sendUpdate() {
