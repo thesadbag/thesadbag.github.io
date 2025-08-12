@@ -279,11 +279,11 @@
       function registerBagTag() {
         contactServer({action: "register",
 					   bagid: document.getElementById("bagid").value,
-					   desc: document.getElementById("desc_register").value,
-					   email: document.getElementById("email_register").value,
-                       tele: document.getElementById("tele_register").value,
-                       reward: document.getElementById("reward_register").value,
-                       misc: document.getElementById("misc_register").innerText,
+					   desc: btoa(document.getElementById("desc_register").value),
+					   email: btoa(document.getElementById("email_register").value),
+                       tele: btoa(document.getElementById("tele_register").value),
+                       reward: btoa(document.getElementById("reward_register").value),
+                       misc: btoa(document.getElementById("misc_register").innerText),
                        lost: document.getElementById("lost_register").ischecked})
       }
 
