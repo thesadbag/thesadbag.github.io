@@ -130,7 +130,7 @@
           <header>
             <h4 class="w3-center" id="bagid_register">Bag Tag Number</h4>
           </header>
-          <form class="" name="register" action="javascript:void(0)" onsubmit="register()">
+          <form class="" name="register" action="javascript:void(0)" onsubmit="registerBagTag()">
             <p><label for="email_registar">Email Address :</label>
               <input class="w3-input w3-border" id="email_register" name="reward" type="text" required/></p>
             <p><label for="tele_register">Telephone Number :</label>
@@ -274,7 +274,7 @@
         sendEmail();
       }
       
-      function register() {
+      function registerBagTag() {
         contactServer({action: "register",
 					   bagid: document.getElementById("bagid").value,
 					   email: document.getElementById("email_register").value,
