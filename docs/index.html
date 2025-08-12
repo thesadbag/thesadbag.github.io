@@ -230,7 +230,7 @@
         } else if ("success" in data){
           document.getElementById("msg_update").innerText = data.success == 1 ? "Update succeeded" : "Update failed"
         } else {
-
+          console.log(data.bagid)
           if (data.bagid == -1) {
             show('no-bag')
           } else if (data.bagid == -2 ) {
