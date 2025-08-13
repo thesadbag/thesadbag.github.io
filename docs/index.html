@@ -177,7 +177,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbzkzxu6qyBz55u1wP5L064isjb2e5oLWMkQ2XlqbHtCrlzf8kGNp3vW_E7T2w_ghr5o/exec";
+      const url = "https://script.google.com/macros/s/AKfycbxhA_QUX8uxmni4ckR4EBUGkt_cZKy9AekPuvJbTN5f8oR3udATO27EXZdmgSMtjY3O/exec";
       let searchParams = new URLSearchParams(window.location.search);
       
       if (searchParams.has("uuid")) {
@@ -242,10 +242,10 @@
 		if (data.action == 'update') {
           document.getElementById("bagid_update").value = data.bagid
           document.getElementById("uuid_update").value = data.uuid
-          document.getElementById("bag_name").value = btoa(data.desc)
-          document.getElementById("tele_update").value = btoa(data.tele)
-          document.getElementById("reward_update").value = btoa(data.reward)
-          document.getElementById("misc_update").innerText = btoa(data.misc)
+          document.getElementById("bag_name").value = atob(data.desc)
+          document.getElementById("tele_update").value = atob(data.tele)
+          document.getElementById("reward_update").value = atob(data.reward)
+          document.getElementById("misc_update").innerText = atob(data.misc)
           document.getElementById("lost_update").checked = data.lost == "TRUE"
           show("update")
         } else if (data.action == 'register') {
@@ -313,9 +313,9 @@
       function sendUpdate() {
         contactServer({uuid: document.getElementById("uuid_update").value,
                        action: "updateData",
-                       tele: document.getElementById("tele_update").value,
-                       reward: document.getElementById("reward_update").value,
-                       misc: document.getElementById("misc_update").innerText,
+                       tele: btoa(document.getElementById("tele_update").value),
+                       reward: btoa(document.getElementById("reward_update").value),
+                       misc: btoa(document.getElementById("misc_update").innerText),
                        lost: document.getElementById("lost_update").ischecked})
       }
       
