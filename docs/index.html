@@ -161,7 +161,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbwMG6RH3Bvm6N8QxVDYuWHnv_CrzzdbcrDvMgDSqf4eGXp8mjOskpqmXRz3EWMv-hNr/exec";
+      const url = "https://script.google.com/macros/s/AKfycbwBmh52L_x464e1t7ShyQqQe-v-Jic2_NnNhsICzuXlkW63s9U_Achwx0zCKpmBUB4j/exec";
       let searchParams = new URLSearchParams(window.location.search);
       
       if (searchParams.has("uuid")) {
@@ -218,8 +218,9 @@
         console.log(data)
 
         hide('loading')
-        
-        if ("uuid" in data){
+
+
+		if (data.action == 'update') {
           document.getElementById("bagid_update").value = data.bagid
           document.getElementById("uuid_update").value = data.uuid
           document.getElementById("bag_name").value = data.desc
@@ -228,30 +229,29 @@
           document.getElementById("misc_update").innerText = data.misc
           document.getElementById("lost_update").checked = data.lost == "TRUE"
           show("update")
-        } else {
-          console.log(data.bagid)
-          if (data.bagid == -1) {
-            show('no-bag')
-          } else if (data.bagid == -2 ) {
-            show("register")
-          } else {
-            if (data.lost == "TRUE") {
-              if (data.tel.length > 0){
-                document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
-              }
-              if (data.reward.length > 0){
-                document.getElementById('reward').innerText = 'Reward: ' + data.reward
-                show('reward')
-              }
-              if (data.misc.length > 0) {
-                document.getElementById('misc').innerText = data.misc
-                show('misc')
-              }
-              show('contact-info')
-            }
-            show('has-bag')
-          }
-        }
+        } else if (data.action == 'register') {
+	      show("register")
+		} else if (data.action == 'not_registered') {
+			show('no-bag')
+		} else if (data.action == 'no_bag') {
+		  show('no-bag')
+		} else if (data.action == 'has_bag') {
+		  if (data.lost == "TRUE") {
+			if (data.tel.length > 0){
+			  document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
+		    }
+		    if (data.reward.length > 0){
+			  document.getElementById('reward').innerText = 'Reward: ' + data.reward
+			  show('reward')
+		    }
+			if (data.misc.length > 0) {
+			  document.getElementById('misc').innerText = data.misc
+			  show('misc')
+			}
+			show('contact-info')
+		  }
+		  show('has-bag')
+		}
       }
       
       function sendEmail(lat='', lon='', note='') {
