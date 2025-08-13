@@ -242,10 +242,10 @@
 		if (data.action == 'update') {
           document.getElementById("bagid_update").value = data.bagid
           document.getElementById("uuid_update").value = data.uuid
-          document.getElementById("bag_name").value = data.desc
-          document.getElementById("tele_update").value = data.tele
-          document.getElementById("reward_update").value = data.reward
-          document.getElementById("misc_update").innerText = data.misc
+          document.getElementById("bag_name").value = btoa(data.desc)
+          document.getElementById("tele_update").value = btoa(data.tele)
+          document.getElementById("reward_update").value = btoa(data.reward)
+          document.getElementById("misc_update").innerText = btoa(data.misc)
           document.getElementById("lost_update").checked = data.lost == "TRUE"
           show("update")
         } else if (data.action == 'register') {
