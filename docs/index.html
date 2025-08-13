@@ -161,7 +161,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbzBCsDLh9-tXcoYtuCvuqRbt6NHLshL0pTCLdESOjvnSSPSNGtD961sPip5ev4zots/exec";
+      const url = "https://script.google.com/macros/s/AKfycbyNNXEKaoF9n6IflVKfr49LVDoklvVoTVEUfrebL9Vz1WkPjYuSm79E08uR9umqkXXf/exec";
       let searchParams = new URLSearchParams(window.location.search);
       
       if (searchParams.has("uuid")) {
@@ -228,8 +228,6 @@
           document.getElementById("misc_update").innerText = data.misc
           document.getElementById("lost_update").checked = data.lost == "TRUE"
           show("update")
-        } else if ("success" in data){
-          document.getElementById("msg_update").innerText = data.success == 1 ? "Update succeeded" : "Update failed"
         } else {
           console.log(data.bagid)
           if (data.bagid == -1) {
