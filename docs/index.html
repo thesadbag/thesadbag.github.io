@@ -185,7 +185,7 @@
           contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
 		} else {
           contactServer({uuid: searchParams.get("uuid"), action: 'update'})
-	      document.getelementById("uuid_update").value = searchParams.get("uuid")
+	      document.getElementById("uuid_update").value = searchParams.get("uuid")
 		}
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
