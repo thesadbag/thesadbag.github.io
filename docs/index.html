@@ -317,12 +317,17 @@
       }
 
       function sendUpdate() {
+		if (document.getElementById("lost_update").checked == true) {
+		  var losted = "TRUE"
+		} else {
+			var losted = "FALSE"
+		}
         contactServer({uuid: document.getElementById("uuid_update").value,
                        action: "updateData",
                        tele: btoa(document.getElementById("tele_update").value),
                        reward: btoa(document.getElementById("reward_update").value),
                        misc: btoa(document.getElementById("misc_update").innerText),
-                       lost: document.getElementById("lost_update").ischecked})
+                       lost: losted})
       }
       
       function showPosition(position) {
