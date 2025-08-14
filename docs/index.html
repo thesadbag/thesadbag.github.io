@@ -172,7 +172,7 @@
         <h2 class="w3-center">Register Bag Tag</h2>
         <div class="card">
           <header>
-            <h4 class="w3-center" id="bagid_register_header" name='bag_tag_number'>Bag Tag Number</h4>
+            <h4 class="w3-center" id="bagid_register_header">Bag Tag Number</h4>
           </header>
           <form class="" name="register" action="javascript:void(0)" onsubmit="registerBagTag()">
             <p><label for="email_registar">Email Address: </label>
@@ -233,7 +233,7 @@
 		}
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
-        document.getElementByName("bagid").value = bagid_num
+        document.getElementByTagName("bagid").value = bagid_num
         sendEmail();
       } else {
       	hide("loading");
@@ -285,8 +285,8 @@
 
 
 		if (data.action == 'update') {
-			document.getElementByName("bagid").value = data.bagid
-			document.getElementByName("uuid").value = data.uuid
+			document.getElementByTagName("bagid").value = data.bagid
+			document.getElementByTagName("uuid").value = data.uuid
 			document.getElementById("bag_name").value = atob(data.desc)
 			document.getElementById("tele_update").value = atob(data.tele)
 			document.getElementById("reward_update").value = atob(data.reward)
@@ -301,11 +301,11 @@
 		} else if (data.action == 'not_registered') {
 			show('no-bag')
 		} else if (data.action == 'verified') {
-			document.getElementByName('bag_tag_number').innerText = data.uuid
+			document.getElementById('bagid_register_header').innerText = data.uuid
 		  document.getElementById("bagid_verified").innerText = data.desc + ' verified'
 		  show('verified')
 		} else if (data.action == 'not_verified'){
-			document.getElementByName('bag_tag_number').innerText = data.uuid
+			document.getElementById('bagid_register_header').innerText = data.uuid
 		  document.getElementById("bagid_verified").innerText = data.desc + ' not verified'
 		  show('verified')			
 		} else if (data.action == 'no_bag') {
