@@ -227,6 +227,8 @@
       let searchParams = new URLSearchParams(window.location.search);
 
 			let geo_prompt = false
+
+			let geo_tries = 0
       
       if (searchParams.has("uuid")) {
         document.getElementById("uuid").value = searchParams.get("uuid")
@@ -256,7 +258,6 @@
 			}
 
       function getLocation() {
-				geo_prompt = true
         x.innerHTML = "Starting to get a position... <br />"
         if (navigator.geolocation) {
           x.innerHTML = x.innerHTML + "It's possible to get the location... <br />"
@@ -398,6 +399,7 @@
       }
       
       function showPosition(position) {
+				geo_prompt = true
         // x.innerHTML = "Oh thank you!!  I hope my person comes back quickly.  You can also take me to a &quot;Lost and Found&quot; and scan the QR code again to send my location from there."
         // x.innerHTML = "Latitude: " + position.coords.latitude + 
         // "<br>Longitude: " + position.coords.longitude +
@@ -406,6 +408,8 @@
       }
 
       function showError(error) {
+				geo_prompt = true
+				geo_tries++
         // x.innerHTML = x.innerHTML + "There was an error... <br />"
         // switch(error.code) {
         //   case error.PERMISSION_DENIED:
@@ -422,9 +426,32 @@
         //     break;
         // }
         // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
-        x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; or something?  I hope they can help!"
+        // x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; or something?  I hope they can help!"
 
-        sendEmail("", "", "Error getting the current position from scanning device.")
+				switch(error.code) {
+					case error.PERMISSION_DENIED:
+						var note = 'User Refused Geolocation'
+						var try_again = false
+						geo_tries = 7
+						break;
+					case error.POSITION_UNAVAILABLE:
+						var note = 'Position Unavailable'
+						var try_again = true
+						break;
+					case error.TIMEOUT:
+						var note = 'Geolocation Timedout'
+						var try_again = true
+						break;
+					case error.UNKNOWN_ERROR:
+						var note = 'Unknown Geolocation Error'
+						var try_agian = true
+						break;
+				}
+        sendEmail("", "", note)
+
+				if ((try_again) & (geo_tries < 6) {
+					setTimeout(timeoutFunc, 5000)
+				}
       }
       
       function show_hide(id) {
