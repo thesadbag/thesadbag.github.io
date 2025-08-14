@@ -223,7 +223,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbyt7Px_Nro4zBslt2bnHYbLmO84UrGH4bR4PnDzFqBvqoHx-004wvoPFYLtL1UWM4nX/exec";
+      const url = "https://script.google.com/macros/s/AKfycbxjqbhJQa_tKAU__CWgmn6hEK4nCzrjQNcbNWA3BbgzLvnSev_iI9mnNAsHaKoYW8Qu/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
 			let geo_prompt = false
@@ -354,8 +354,8 @@
         contactServer({bagid: document.getElementById("bagid").value, 
                        lat: lat,
                        lon: lon,
-                       tele: document.getElementById('tel').value, 
-                       note: note,
+                       tele: btoa(document.getElementById('tel').value), 
+                       note: btoa(note),
                        action: 'sendEmail'})
       }
       
