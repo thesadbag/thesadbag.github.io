@@ -187,6 +187,7 @@
               <textarea class="w3-input w3-border" id="misc_register" name="misc" placeholder="Any information to display when the bag tag is scanned.  It only shows when the bag is set to lost.  Place an email address here, as the above email address is not used for this." ></textarea></p>
             <p><label>Bag is Lost (Show telephone number, reward, and misc fields): </label><input class="w3-check" id="lost_register" name="lost_register" type="checkbox"></p>
             <input type="hidden" id="bagid_register" name="bagid" value="" />
+            <input type="hidden" id="uuid_register" name="uuid" value="" />
             <p class="w3-center w3-block"><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-block w3-button-rounder w3-ripple">Register</button></p>
           </form>
         </div>
@@ -225,7 +226,8 @@
       let searchParams = new URLSearchParams(window.location.search);
       
       if (searchParams.has("uuid")) {
-        document.getElementByName("uuid").value = searchParams.get("uuid")
+        document.getElementsById("uuid").value = searchParams.get("uuid")
+        document.getElementsById("uuid_update").value = searchParams.get("uuid")
 		if (searchParams.get('action') == 'verify'){
           contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
 		} else {
@@ -233,7 +235,7 @@
 		}
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
-        document.getElementByTagName("bagid").value = bagid_num
+        document.getElementById("bagid").value = bagid_num
         sendEmail();
       } else {
       	hide("loading");
@@ -285,8 +287,8 @@
 
 
 		if (data.action == 'update') {
-			document.getElementByTagName("bagid").value = data.bagid
-			document.getElementByTagName("uuid").value = data.uuid
+			document.getElementById("bagid_update").value = data.bagid
+			document.getElementByTagId("uuid_update").value = data.uuid
 			document.getElementById("bag_name").value = atob(data.desc)
 			document.getElementById("tele_update").value = atob(data.tele)
 			document.getElementById("reward_update").value = atob(data.reward)
@@ -297,6 +299,8 @@
 			hide('update')
 			show('has_bag')
 		} else if (data.action == 'register') {
+			document.getElementById("bagid_register").value = data.bagid
+			document.getElementByTagId("uuid_register").value = data.uuid
 			show("register")
 		} else if (data.action == 'not_registered') {
 			show('no-bag')
