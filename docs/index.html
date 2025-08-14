@@ -247,12 +247,13 @@
         show("no-bag");
       }
 
-			function startTimeout(timeout=5000) {
-				setTimeout(timeoutFunc, timeout)
-				var tmp = document.getElementsByTagName('body')[0]
-				tmp.onmouseover = ''
-				tmp.onscroll=''
-
+      function startTimeout(timeout=5000) {
+        setTimeout(timeoutFunc, timeout)
+        var tmp = document.getElementsByTagName('body')[0]
+        tmp.onmouseover = ''
+        tmp.onscroll=''
+      }
+      
 			function timeoutFunc() {
 				if (geo_prompt){
 					return 
