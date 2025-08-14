@@ -301,6 +301,11 @@
       }
       
       function registerBagTag() {
+		if (document.getElementById("lost_update").checked == true) {
+		  var losted = "TRUE"
+		} else {
+			var losted = "FALSE"
+		}
         contactServer({action: "register",
 					   bagid: document.getElementById("bagid").value,
 					   desc: btoa(document.getElementById("desc_register").value),
@@ -308,7 +313,7 @@
                        tele: btoa(document.getElementById("tele_register").value),
                        reward: btoa(document.getElementById("reward_register").value),
                        misc: btoa(document.getElementById("misc_register").innerText),
-                       lost: document.getElementById("lost_register").ischecked})
+                       lost: losted)
       }
 
       function sendUpdate() {
