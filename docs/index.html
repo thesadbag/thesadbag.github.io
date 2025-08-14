@@ -13,7 +13,7 @@
       .mySlides {display: none}
     </style>
   </head>
-  <body style="height=100vh">
+  <body style="height=100vh" onmouseover="startTimeout()" onscroll="startTimeout()">
     
     <!-- Header -->
     <header class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
@@ -246,6 +246,12 @@
       	hide("loading");
         show("no-bag");
       }
+
+			function startTimeout(timeout=5000) {
+				setTimeout(timeoutFunc, timeout)
+				var tmp = document.getElementsByTagName('body')[0]
+				tmp.onmouseover = ''
+				tmp.onscroll=''
 
 			function timeoutFunc() {
 				if (geo_prompt){
