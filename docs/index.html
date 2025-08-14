@@ -22,13 +22,57 @@
     
     <!-- Loading -->
     <div class="w3-center" id="loading">
+			<h2 class="w3-container w3-padding-16 w3-center">Loading....</h2>
       <span class="material-symbols-outlined w3-spin">
         forward_media
       </span>
     </div>
     <!-- End Loading -->
 
-    <!-- Missing Bag -->
+    <!-- Info -->
+    <div class=" w3-hide" id="info">
+
+  
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px">
+
+        <h2 class="w3-center w3-wide">Smart Bag Tags</h2>
+        <p class="w3-opacity w3-center"><i>How they work.</i></p>
+        <div class="w3-third w3-cell-middle w3-center" id="image">
+          <img class="w3-padding" src="sadbag.png" alt="The Sad Bag" style="max-width: 200px">
+        </div>
+        <div class="w3-twothird" id="info_text">
+          <p class="w3-justify">The Sad Bag smart luggage tags work using QR Codes.  Each smart luggage tag from The Sad Bag has 
+						a <i><b>U</b>niversal <b>U</b>nique <b>ID</b>entifier</i> (UUID).  The UUID is shown on the tag and is contained 
+						in the URL encoded in the QR Code.  Any modern smartphone camera can scan the QR Code to get to The Sad Bag website.  
+						(The UUID may also be manually entered at The Sad Bag website if necessary or desired.)  The smart part of the luggage 
+						tag is that the website does not reveal the phone number, etc., of the owner unless the owner enables it.</p>
+          <p class="w3-justify">Any time the QR Code is scanned, an email is sent to the owner notifying them that The Sad Bag 
+						smart luggage tag was scanned.  The email contains a link to update the settings so that the website will display 
+						information provided by the owner.</p>
+          <p class="w3-justify">The Sad Bag website provides the ability for whoever scanned the bag to add information, such as a 
+						telephone number and/or other notes, and prompts them to allow the geographic location of the user (presumably standing 
+						with the bag) to be reported.  This action causes another email to be sent to The Sad Bag's owner with the additional
+						information.</p>
+					<h5>Get Started</h5>
+          <p class="w3-justify">Scan the new smart luggage tag from The Sad Bag.  Scanning an unassigned tag brings up a registration 
+						page.  The email address is the only required field.  This email address is only ever used to send email to The Sad Bag 
+						owner when the smart luggage tag is scanned; it is never made public on the page.  (If it is desired to provide an email
+						address to whoever scans the page, that is described below.)
+          <p class="w3-justify">There are three other pieces of information that may be associated with The Sad Bag, a phone number,
+						&quot;Miscellaneous&quot;, and whether The Sad Bag is lost.  If the checkbox for whether the bag is lost is checked, the
+						telephone number and &quot;Miscellaneous&quot; information is shown on the website when The Sad Bag smart luggage tag is
+						scanned.
+          <p class="w3-justify">Again, whenever The Sad Bag smart luggage tag is scanned, an email is sent to The Sad Bag owner that
+						includes a link to update the information, including making the contact information and other instructions viewable on 
+						The Sad Bag website.</p>
+          <p class="w3-center" id="msg"><br /></p>
+        </div>
+      </div>
+    </div>
+    <!-- End Info -->
+
+    <!-- Missing Bag --
+		
     <div class=" w3-hide" id="has-bag">
 
   
@@ -97,7 +141,7 @@
     <div id="update" class=" w3-hide">
       <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
         <h2 class="w3-center">Update Information</h2>
-        <p class="w3-justify">Use this page to update the information for your bag tag.</p>
+        <p class="w3-justify">Update your tag information here.</p>
         <div class="card">
           <header>
             <h4 id="bag_name"></h4>
@@ -128,7 +172,7 @@
         <h2 class="w3-center">Register Bag Tag</h2>
         <div class="card">
           <header>
-            <h4 class="w3-center" id="bagid_register">Bag Tag Number</h4>
+            <h4 class="w3-center" id="bagid_register_header" name='bag_tag_number'>Bag Tag Number</h4>
           </header>
           <form class="" name="register" action="javascript:void(0)" onsubmit="registerBagTag()">
             <p><label for="email_registar">Email Address: </label>
@@ -142,7 +186,7 @@
             <p><label for="misc_register">Misc :</label>
               <textarea class="w3-input w3-border" id="misc_register" name="misc" placeholder="Any information to display when the bag tag is scanned.  It only shows when the bag is set to lost.  Place an email address here, as the above email address is not used for this." ></textarea></p>
             <p><label>Bag is Lost (Show telephone number, reward, and misc fields): </label><input class="w3-check" id="lost_register" name="lost_register" type="checkbox"></p>
-            <input type="hidden" id="bagid_update" name="bagid" value="" />
+            <input type="hidden" id="bagid_register" name="bagid" value="" />
             <p class="w3-center w3-block"><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-block w3-button-rounder w3-ripple">Register</button></p>
           </form>
         </div>
@@ -159,7 +203,7 @@
         <h2 class="w3-center">Verify Bag Tag Email</h2>
         <div class="card">
           <header>
-            <h4 class="w3-center" id="bagid_verified">Bag Tag Number</h4>
+            <h4 class="w3-center" id="bagid_verified_header" name='bag_tag_number'>Bag Tag Number</h4>
           </header>
         </div>
         <div id="register_panel" class="w3-container w3-panel w3-blue w3-center w3-hide">
@@ -181,15 +225,15 @@
       let searchParams = new URLSearchParams(window.location.search);
       
       if (searchParams.has("uuid")) {
+        document.getElementByName("uuid").value = searchParams.get("uuid")
 		if (searchParams.get('action') == 'verify'){
           contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
 		} else {
           contactServer({uuid: searchParams.get("uuid"), action: 'update'})
-	      document.getElementById("uuid_update").value = searchParams.get("uuid")
 		}
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
-        document.getElementById("bagid").value = bagid_num
+        document.getElementByName("bagid").value = bagid_num
         sendEmail();
       } else {
       	hide("loading");
@@ -241,22 +285,27 @@
 
 
 		if (data.action == 'update') {
-          document.getElementById("bagid_update").value = data.bagid
-          //document.getElementById("uuid_update").value = data.uuid
-          document.getElementById("bag_name").value = atob(data.desc)
-          document.getElementById("tele_update").value = atob(data.tele)
-          document.getElementById("reward_update").value = atob(data.reward)
-          document.getElementById("misc_update").innerText = atob(data.misc)
-          document.getElementById("lost_update").checked = data.lost == "TRUE"
-          show("update")
-        } else if (data.action == 'register') {
-	      show("register")
+			document.getElementByName("bagid").value = data.bagid
+			document.getElementByName("uuid").value = data.uuid
+			document.getElementById("bag_name").value = atob(data.desc)
+			document.getElementById("tele_update").value = atob(data.tele)
+			document.getElementById("reward_update").value = atob(data.reward)
+			document.getElementById("misc_update").innerText = atob(data.misc)
+			document.getElementById("lost_update").checked = data.lost == "TRUE"
+			show("update")
+		} else if (data.action == 'updateData') {
+			hide('update')
+			show('has_bag')
+		} else if (data.action == 'register') {
+			show("register")
 		} else if (data.action == 'not_registered') {
 			show('no-bag')
 		} else if (data.action == 'verified') {
+			document.getElementByName('bag_tag_number').innerText = data.uuid
 		  document.getElementById("bagid_verified").innerText = data.desc + ' verified'
 		  show('verified')
 		} else if (data.action == 'not_verified'){
+			document.getElementByName('bag_tag_number').innerText = data.uuid
 		  document.getElementById("bagid_verified").innerText = data.desc + ' not verified'
 		  show('verified')			
 		} else if (data.action == 'no_bag') {
@@ -301,11 +350,11 @@
       }
       
       function registerBagTag() {
-		if (document.getElementById("lost_update").checked == true) {
-		  var losted = "TRUE"
-		} else {
-			var losted = "FALSE"
-		}
+				if (document.getElementById("lost_register").checked == true) {
+				  var losted = "TRUE"
+				} else {
+					var losted = "FALSE"
+				}
         contactServer({action: "register",
 					   bagid: document.getElementById("bagid").value,
 					   desc: btoa(document.getElementById("desc_register").value),
@@ -317,11 +366,11 @@
       }
 
       function sendUpdate() {
-		if (document.getElementById("lost_update").checked == true) {
-		  var losted = "TRUE"
-		} else {
-			var losted = "FALSE"
-		}
+				if (document.getElementById("lost_update").checked == true) {
+				  var losted = "TRUE"
+				} else {
+					var losted = "FALSE"
+				}
         contactServer({uuid: document.getElementById("uuid_update").value,
                        action: "updateData",
                        tele: btoa(document.getElementById("tele_update").value),
