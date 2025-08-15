@@ -408,6 +408,7 @@
       }
 
       function showError(error) {
+        console.log(error)
 				geo_prompt = true
 				geo_tries++
         // x.innerHTML = x.innerHTML + "There was an error... <br />"
@@ -428,30 +429,30 @@
         // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
         // x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; or something?  I hope they can help!"
 
-				switch(error.code) {
-					case error.PERMISSION_DENIED:
-						var note = 'User Refused Geolocation'
-						var try_again = false
-						geo_tries = 7
-						break;
-					case error.POSITION_UNAVAILABLE:
-						var note = 'Position Unavailable'
-						var try_again = true
-						break;
-					case error.TIMEOUT:
-						var note = 'Geolocation Timedout'
-						var try_again = true
-						break;
-					case error.UNKNOWN_ERROR:
-						var note = 'Unknown Geolocation Error'
-						var try_agian = true
-						break;
-				}
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            var note = 'User Refused Geolocation'
+            var try_again = false
+            geo_tries = 7
+            break;
+          case error.POSITION_UNAVAILABLE:
+            var note = 'Position Unavailable'
+            var try_again = true
+            break;
+          case error.TIMEOUT:
+            var note = 'Geolocation Timedout'
+            var try_again = true
+            break;
+          case error.UNKNOWN_ERROR:
+            var note = 'Unknown Geolocation Error'
+            var try_agian = true
+            break;
+        }
         sendEmail("", "", note)
-
-				if ((try_again) & (geo_tries < 6)) {
-					setTimeout(timeoutFunc, 5000)
-				}
+  
+        if ((try_again) && (geo_tries < 6)) {
+          setTimeout(timeoutFunc, 5000)
+        }
       }
       
       function show_hide(id) {
