@@ -92,8 +92,7 @@
             <input class="w3-input w3-border" type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
   
             <p><label for="note">Note (optional):</label>
-            <input class="w3-input w3-border" type="text" name="note" placeholder="Any information or &quot;Lost and Found&quot; location?" id="note" size="45"/></p>
-  			<textarea class="w3-input" id="note" placeholder="Any information or &quot;Lost &amp; Found&quot; location can be entered here."></textarea>
+  			<textarea class="w3-input w3-border" id="note" placeholder="Any information or &quot;Lost &amp; Found&quot; location can be entered here."></textarea>
             <p><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-button-block w3-button-rounder w3-ripple">Send My Location to My Person!</button></p>
   
             <input type="hidden" id="bagid" name="bagid" value="" />
@@ -231,11 +230,7 @@
       let geo_tries = 0
       
       window.onload = function() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else {
-          
-        }
+       getLocation()
       };
       
       if (searchParams.has("uuid")) {
