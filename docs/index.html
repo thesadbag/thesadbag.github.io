@@ -393,7 +393,6 @@
       }
 
       function getLocation() {
-        x.innerHTML = "Starting to get a position... <br />"
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition, showError);
         } else { 
