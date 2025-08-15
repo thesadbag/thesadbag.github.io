@@ -229,9 +229,9 @@
       
       let geo_tries = 0
       
-      // window.onload = function() {
-      //  getLocation()
-      // };
+      window.onload = function() {
+       getLocation()
+      };
       
       if (searchParams.has("uuid")) {
         document.getElementById("uuid").value = searchParams.get("uuid")
@@ -331,8 +331,8 @@
 			}
 	      
       function sendEmail(lat='', lon='', note='') {
-        if (note == ''){
-          note = document.getElementById('note').value
+        if (note != ''){
+          note += '\n\n' + document.getElementById('note').value
         }
         contactServer({bagid: document.getElementById("bagid").value, 
                        lat: lat,
@@ -402,15 +402,15 @@
       }
 
       function showPosition(position) {
-				geo_prompt = true
+        geo_prompt = true
         console.log(position)
         sendEmail(position.coords.latitude, position.coords.longitude)
       }
 
       function showError(error) {
         console.log(error)
-				geo_prompt = true
-				geo_tries++
+        geo_prompt = true
+        geo_tries++
         // x.innerHTML = x.innerHTML + "There was an error... <br />"
         // switch(error.code) {
         //   case error.PERMISSION_DENIED:
@@ -431,20 +431,20 @@
 
         switch(error.code) {
           case error.PERMISSION_DENIED:
-            var note = 'User Refused Geolocation'
+            var note = '***User Refused Geolocation***'
             var try_again = false
             geo_tries = 7
             break;
           case error.POSITION_UNAVAILABLE:
-            var note = 'Position Unavailable'
+            var note = '***Position Unavailable***'
             var try_again = true
             break;
           case error.TIMEOUT:
-            var note = 'Geolocation Timedout'
+            var note = '***Geolocation Timedout***'
             var try_again = true
             break;
           case error.UNKNOWN_ERROR:
-            var note = 'Unknown Geolocation Error'
+            var note = '***Unknown Geolocation Error***'
             var try_agian = true
             break;
         }
