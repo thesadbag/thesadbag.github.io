@@ -222,7 +222,7 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbxjqbhJQa_tKAU__CWgmn6hEK4nCzrjQNcbNWA3BbgzLvnSev_iI9mnNAsHaKoYW8Qu/exec";
+      const url = "https://script.google.com/macros/s/AKfycbweT1xSxEK-PvrrKxNIMNIPUK7g4Jx6amgKerhEYUgmwF4gnD1JhiK41VmvveFP34Hp/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
       let geo_prompt = false
@@ -233,14 +233,16 @@
         document.getElementById("uuid").value = searchParams.get("uuid")
         document.getElementById("uuid_update").value = searchParams.get("uuid")
         if (searchParams.get('action') == 'verify'){
-              contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
+          contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
         } else {
-              contactServer({uuid: searchParams.get("uuid"), action: 'update'})
+          contactServer({uuid: searchParams.get("uuid"), action: 'update'})
         }
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
   
+        contactServer({bagid: searchParams.get("bagid")})
+        
         window.onload = function() {
          startTimeout(15000)
         };
@@ -252,20 +254,13 @@
       }
 
       function contactServer(json_struct){
-        console.log(JSON.stringify(json_struct))
-        // fetch(url, {
-        //   method: "POST",
-        //   body: JSON.stringify(json_struct),
-        //   headers: {
-        //     "Content-type": "text/plain; charset=UTF-8"
-        //   }
-        // }).then(response => response.json()).then(data => {fetchResponse(data)})
+        // console.log(JSON.stringify(json_struct))
         var get_string = ''
         for (const [key, value] of Object.entries(json_struct)) {
           get_string += "&" + key + "=" + value 
         }
         get_string = '?' + get_string.substring(1, get_string.length)
-        console.log(get_string)
+        // console.log(get_string)
         
         fetch(url + get_string, {
           method: "GET",
@@ -276,10 +271,10 @@
       }
 
       function fetchResponse(data){
-        console.log("fetchResponse()")
-        console.log(data)
+        // console.log("fetchResponse()")
+        // console.log(data)
         data = JSON.parse(data)
-        console.log(data)
+        // console.log(data)
 
         hide('loading')
 
@@ -403,12 +398,12 @@
 
       function showPosition(position) {
         geo_prompt = true
-        console.log(position)
+        // console.log(position)
         sendEmail(position.coords.latitude, position.coords.longitude)
       }
 
       function showError(error) {
-        console.log(error)
+        // console.log(error)
         geo_prompt = true
         geo_tries++
         // x.innerHTML = x.innerHTML + "There was an error... <br />"
