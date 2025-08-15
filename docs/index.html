@@ -242,7 +242,7 @@
         document.getElementById("bagid").value = bagid_num
   
         window.onload = function() {
-         startTimeout()
+         startTimeout(15000)
         };
         
         // sendEmail();
@@ -284,53 +284,53 @@
         hide('loading')
 
 
-				if (data.action == 'update') {
-					document.getElementById("bagid_update").value = data.bagid
-					document.getElementById("uuid_update").value = data.uuid
-					document.getElementById("bag_name").value = atob(data.desc)
-					document.getElementById("tele_update").value = atob(data.tele)
-					document.getElementById("reward_update").value = atob(data.reward)
-					document.getElementById("misc_update").innerText = atob(data.misc)
-					document.getElementById("lost_update").checked = data.lost == "TRUE"
-					show("update")
-				} else if (data.action == 'updateData') {
-					hide('update')
-					show('has_bag')
-				} else if (data.action == 'register') {
-					document.getElementById("bagid_register").value = data.bagid
-					document.getElementById("uuid_register").value = data.uuid
-					show("register")
-				} else if (data.action == 'not_registered') {
-					show('no-bag')
-				} else if (data.action == 'verified') {
-					document.getElementById('bagid_register_header').innerText = data.uuid
-				  document.getElementById("bagid_verified").innerText = data.desc + ' verified'
-				  show('verified')
-				} else if (data.action == 'not_verified'){
-					document.getElementById('bagid_register_header').innerText = data.uuid
-				  document.getElementById("bagid_verified").innerText = data.desc + ' not verified'
-				  show('verified')			
-				} else if (data.action == 'no_bag') {
-				  show('no-bag')
-				} else if (data.action == 'has_bag') {
-				  if (data.lost == "TRUE") {
-						if (data.tel.length > 0){
-						  document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
-						}
-						if (data.reward.length > 0){
-							document.getElementById('reward').innerText = 'Reward: ' + data.reward
-							show('reward')
-						}
-						if (data.misc.length > 0) {
-						  document.getElementById('misc').innerText = data.misc
-						  show('misc')
-						}
-						show('contact-info')
-					}
-					show('has-bag')
-				}
-			}
-	      
+        if (data.action == 'update') {
+          document.getElementById("bagid_update").value = data.bagid
+          document.getElementById("uuid_update").value = data.uuid
+          document.getElementById("bag_name").value = atob(data.desc)
+          document.getElementById("tele_update").value = atob(data.tele)
+          document.getElementById("reward_update").value = atob(data.reward)
+          document.getElementById("misc_update").innerText = atob(data.misc)
+          document.getElementById("lost_update").checked = data.lost == "TRUE"
+          show("update")
+        } else if (data.action == 'updateData') {
+          hide('update')
+          show('has_bag')
+        } else if (data.action == 'register') {
+          document.getElementById("bagid_register").value = data.bagid
+          document.getElementById("uuid_register").value = data.uuid
+          show("register")
+        } else if (data.action == 'not_registered') {
+          show('no-bag')
+        } else if (data.action == 'verified') {
+          document.getElementById('bagid_register_header').innerText = data.uuid
+          document.getElementById("bagid_verified").innerText = data.desc + ' verified'
+          show('verified')
+        } else if (data.action == 'not_verified'){
+          document.getElementById('bagid_register_header').innerText = data.uuid
+          document.getElementById("bagid_verified").innerText = data.desc + ' not verified'
+          show('verified')			
+        } else if (data.action == 'no_bag') {
+          show('no-bag')
+        } else if (data.action == 'has_bag') {
+          if (data.lost == "TRUE") {
+            if (data.tel.length > 0){
+              document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
+            }
+            if (data.reward.length > 0){
+              document.getElementById('reward').innerText = 'Reward: ' + data.reward
+              show('reward')
+            }
+            if (data.misc.length > 0) {
+              document.getElementById('misc').innerText = data.misc
+              show('misc')
+            }
+            show('contact-info')
+          }
+          show('has-bag')
+        }
+      }
+        
       function sendEmail(lat='', lon='', note='') {
         if (note != ''){
           note += '\n\n' + document.getElementById('note').value
