@@ -229,10 +229,6 @@
       
       let geo_tries = 0
       
-      window.onload = function() {
-       getLocation()
-      };
-      
       if (searchParams.has("uuid")) {
         document.getElementById("uuid").value = searchParams.get("uuid")
         document.getElementById("uuid_update").value = searchParams.get("uuid")
@@ -244,7 +240,12 @@
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
-        sendEmail();
+  
+        window.onload = function() {
+         startTimeout()
+        };
+        
+        // sendEmail();
       } else {
       	hide("loading");
         show("no-bag");
