@@ -13,7 +13,7 @@
       .mySlides {display: none}
     </style>
   </head>
-  <body style="height=100vh" onmouseover="startTimeout()" onscroll="startTimeout()">
+  <body style="height=100vh">
     
     <!-- Header -->
     <header class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
@@ -215,7 +215,7 @@
     </div>
     <!-- End Verified -->
 
-	<!-- Footer -->
+  <!-- Footer -->
     <footer class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
       <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
       <p class="w3-medium">&copy; Copyright 2024-2025, The Sad Bag</p>
@@ -226,18 +226,26 @@
       const url = "https://script.google.com/macros/s/AKfycbxjqbhJQa_tKAU__CWgmn6hEK4nCzrjQNcbNWA3BbgzLvnSev_iI9mnNAsHaKoYW8Qu/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
-			let geo_prompt = false
-
-			let geo_tries = 0
+      let geo_prompt = false
+      
+      let geo_tries = 0
+      
+      window.onload = function() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+          
+        }
+      };
       
       if (searchParams.has("uuid")) {
         document.getElementById("uuid").value = searchParams.get("uuid")
         document.getElementById("uuid_update").value = searchParams.get("uuid")
-				if (searchParams.get('action') == 'verify'){
-		          contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
-				} else {
-		          contactServer({uuid: searchParams.get("uuid"), action: 'update'})
-				}
+        if (searchParams.get('action') == 'verify'){
+              contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
+        } else {
+              contactServer({uuid: searchParams.get("uuid"), action: 'update'})
+        }
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
@@ -266,7 +274,7 @@
         x.innerHTML = "Starting to get a position... <br />"
         if (navigator.geolocation) {
           x.innerHTML = x.innerHTML + "It's possible to get the location... <br />"
-          navigator.geolocation.getCurrentPosition(showPosition, showError);
+          navigator.geolocation.getCurrentPosition(showPosition, showError, {enabelHighAccuracy: true, timeout: 60000, maximumAge: 60000});
           x.innerHTML = x.innerHTML + "Asked for the location... <br />"
         } else { 
           x.innerHTML = x.innerHTML + "Geolocation is not supported by this browser. <br/>No notification sent. <br /> <br />";
