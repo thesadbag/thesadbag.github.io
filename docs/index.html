@@ -250,32 +250,6 @@
         show("no-bag");
       }
 
-      function startTimeout(timeout=5000) {
-        setTimeout(timeoutFunc, timeout)
-        var tmp = document.getElementsByTagName('body')[0]
-        tmp.onmouseover = ''
-        tmp.onscroll=''
-      }
-      
-			function timeoutFunc() {
-				if (geo_prompt){
-					return 
-				}
-				getLocation()
-				return
-			}
-
-      function getLocation() {
-        x.innerHTML = "Starting to get a position... <br />"
-        if (navigator.geolocation) {
-          x.innerHTML = x.innerHTML + "It's possible to get the location... <br />"
-          navigator.geolocation.getCurrentPosition(showPosition, showError, {enabelHighAccuracy: true, timeout: 60000, maximumAge: 60000});
-          x.innerHTML = x.innerHTML + "Asked for the location... <br />"
-        } else { 
-          x.innerHTML = x.innerHTML + "Geolocation is not supported by this browser. <br/>No notification sent. <br /> <br />";
-        }
-      }
-
       function contactServer(json_struct){
         console.log(JSON.stringify(json_struct))
         // fetch(url, {
@@ -406,12 +380,30 @@
                        lost: losted})
       }
       
+      function startTimeout(timeout=5000) {
+        setTimeout(timeoutFunc, timeout)
+      }
+      
+      function timeoutFunc() {
+        if (geo_prompt){
+          return 
+        }
+        getLocation()
+        return
+      }
+
+      function getLocation() {
+        x.innerHTML = "Starting to get a position... <br />"
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else { 
+          // Geolocation is not available
+        }
+      }
+
       function showPosition(position) {
 				geo_prompt = true
-        // x.innerHTML = "Oh thank you!!  I hope my person comes back quickly.  You can also take me to a &quot;Lost and Found&quot; and scan the QR code again to send my location from there."
-        // x.innerHTML = "Latitude: " + position.coords.latitude + 
-        // "<br>Longitude: " + position.coords.longitude +
-        // "<br>Bag: " + document.getElementById('bagid').value;
+        console.log(position)
         sendEmail(position.coords.latitude, position.coords.longitude)
       }
 
