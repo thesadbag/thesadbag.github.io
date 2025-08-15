@@ -244,7 +244,7 @@
         contactServer({bagid: searchParams.get("bagid")})
         
         window.onload = function() {
-         startTimeout(15000)
+         startTimeout(5000)
         };
         
         // sendEmail();
@@ -310,14 +310,14 @@
         } else if (data.action == 'has_bag') {
           if (data.lost == "TRUE") {
             if (data.tele.length > 0){
-              document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="data.tele">data.tele</a>'
+              document.getElementById('owner-number').innerHtml = 'Telephone Number: ' + '<a href="' + atob(data.tele) + '">' + atob(data.tele) + '</a>'
             }
             if (data.reward.length > 0){
-              document.getElementById('reward').innerText = 'Reward: ' + data.reward
+              document.getElementById('reward').innerText = 'Reward: ' + atob(data.reward)
               show('reward')
             }
             if (data.misc.length > 0) {
-              document.getElementById('misc').innerText = data.misc
+              document.getElementById('misc').innerText = atob(data.misc)
               show('misc')
             }
             show('contact-info')
