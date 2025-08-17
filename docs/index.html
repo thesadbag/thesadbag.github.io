@@ -241,12 +241,12 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbwuZ0BMJQw6VfuerdrS2ihM7OmuAkfVWpA8cIzd1SKUMGnrGjLC2huweGekPCguO3Mn/exec";
+      const url = "https://script.google.com/macros/s/AKfycbxAn0zPE_RqoG5o5QLObv9Npkqg9hyKQsuncMnkaxbdiWHqekBxq7MKUd9VG4ujnke3/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
       let geo_prompt = false
-      
       let geo_tries = 0
+	    let has_bag = -1
       
       if (searchParams.has("uuid")) {
         document.getElementById("uuid").value = searchParams.get("uuid")
@@ -404,10 +404,14 @@
       }
       
       function timeoutFunc() {
-        if (geo_prompt){
-          return 
+        if (has_bag < 0) {
+          startTimeout(timeoutFunc, 15000)
+        } else if ( has_bag > 0) {
+          if (geo_prompt){
+            return 
+          }
+          getLocation()
         }
-        getLocation()
         return
       }
 
@@ -415,7 +419,7 @@
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(showPosition, showError);
         } else { 
-          // Geolocation is not available
+          sendEmail('', '', 'GeoLocation Unavailable')
         }
       }
 
