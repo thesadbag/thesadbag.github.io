@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=forward_media" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=forward_media" />
     <style>
       body {font-family: "Lato", sans-serif}
       .mySlides {display: none}
@@ -19,7 +19,8 @@
     <header class="w3-container w3-padding-16 w3-center w3-opacity w3-light-grey w3-xlarge">
       <h1 class="w3-wide">The Sad Bag</h1>
     </header>
-    
+
+	  <!-- Modal Location Services -->
     <div id="declined" class="w3-modal">
       <div class="w3-modal-content">
         <div class="w3-container">
@@ -28,12 +29,23 @@
         </div>
       </div>
     </div>
+	  <!-- End Modal Location Services -->
+	  
     <!-- Loading -->
     <div class="w3-center" id="loading">
-			<h2 class="w3-container w3-padding-16 w3-center">Loading....</h2>
-      <span class="material-symbols-outlined w3-spin">
-        forward_media
-      </span>
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px">
+        <h2 class="w3-center w3-wide">Smart Bag Tags</h2>
+        <p class="w3-opacity w3-center"><i>How they work.</i></p>
+        <div class="w3-third w3-cell-middle w3-center" id="image">
+          <img class="w3-padding" src="sadbag.png" alt="Image of a blue backpack feeling blue (i.e., a sad bag)." style="max-width: 200px">
+        </div>
+        <div class="w3-twothird" id="info_text">
+          <h2 class="w3-container w3-padding-16 w3-center">Loading....</h2>
+          <span class="material-symbols-outlined w3-spin">
+            forward_media
+          </span>
+        </div>
+      </div>
     </div>
     <!-- End Loading -->
 
@@ -80,12 +92,8 @@
     <!-- End Info -->
 
     <!-- Missing Bag -->
-		
     <div class=" w3-hide" id="has-bag">
-
-  
       <div class="w3-container w3-content w3-padding-32" style="max-width:800px">
-
         <h2 class="w3-center w3-wide">I'm Lost!!!</h2>
         <p class="w3-opacity w3-center"><i>I hope you can help me!?!!</i></p>
         <div class="w3-third w3-cell-middle w3-center" id="image">
@@ -100,7 +108,7 @@
             <input class="w3-input w3-border" type="tel" id="tel" placeholder="(212) 555-1212" title="Telephone number" name="tel" pattern="^(?:\+1)?\s?\(?\d{3}\)?[\-.\s]?\d{3}[\-.\s]?\d{4}$"/></p>
   
             <p><label for="note">Note (optional):</label>
-  			<textarea class="w3-input w3-border" id="note" placeholder="Any information or &quot;Lost &amp; Found&quot; location can be entered here."></textarea>
+  		    	<textarea class="w3-input w3-border" id="note" placeholder="Any information or &quot;Lost &amp; Found&quot; location can be entered here."></textarea>
             <p><button type="submit" class="w3-button w3-center w3-blue w3-button-xxlarge w3-button-block w3-button-rounder w3-ripple">Send My Location to My Person!</button></p>
   
             <input type="hidden" id="bagid" name="bagid" value="" />
