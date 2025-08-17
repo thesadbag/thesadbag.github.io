@@ -330,6 +330,14 @@
         if (note != ''){
           note += '\n\n' + document.getElementById('note').value
         }
+        if (note == '') {
+          note = '[BLANK]'
+        }
+        if (lat == '') {
+          lat = '[BLANK]'
+          lon = '[BLANK]'
+        }
+        
         contactServer({bagid: document.getElementById("bagid").value, 
                        lat: lat,
                        lon: lon,
@@ -407,7 +415,7 @@
         geo_prompt = true
         geo_tries++
         // x.innerHTML = x.innerHTML + "There was an error... <br />"
-        // switch(error.code) {
+        switch(error.code) {
         //   case error.PERMISSION_DENIED:
         //     x.innerHTML = x.innerHTML + "User denied the request for Geolocation."
         //     break;
@@ -429,6 +437,7 @@
             var note = '***User Refused Geolocation***'
             var try_again = false
             geo_tries = 7
+            alert('Oh, I'm sorry, Location Services can help you let my person know where I am.  It is not required, but if you change your mind, you may need to scan the tag again in an InCognito window (or similar).')
             break;
           case error.POSITION_UNAVAILABLE:
             var note = '***Position Unavailable***'
