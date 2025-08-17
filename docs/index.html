@@ -20,6 +20,14 @@
       <h1 class="w3-wide">The Sad Bag</h1>
     </header>
     
+    <div id="declined" class="w3-modal">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span onclick="document.getElementById('declined').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <p>'Oh, I'm sorry, Location Services can help you let my person know where I am.  It is not required, but if you change your mind, you may need to scan the tag again in an <i>InCognito</i> (or similar).</p>
+        </div>
+      </div>
+    </div>
     <!-- Loading -->
     <div class="w3-center" id="loading">
 			<h2 class="w3-container w3-padding-16 w3-center">Loading....</h2>
@@ -416,28 +424,12 @@
         geo_tries++
         // x.innerHTML = x.innerHTML + "There was an error... <br />"
         switch(error.code) {
-        //   case error.PERMISSION_DENIED:
-        //     x.innerHTML = x.innerHTML + "User denied the request for Geolocation."
-        //     break;
-        //   case error.POSITION_UNAVAILABLE:
-        //     x.innerHTML = x.innerHTML + "Location information is unavailable."
-        //     break;
-        //   case error.TIMEOUT:
-        //     x.innerHTML = x.innerHTML + "The request to get user location timed out."
-        //     break;
-        //   case error.UNKNOWN_ERROR:
-        //     x.innerHTML = x.innerHTML + "An unknown error occurred."
-        //     break;
-        // }
-        // x.innerHTML = x.innerHTML + "</br> </br> No notification sent.  Try again?  <br />Maybe go to Settings and turn on Location Services? <br /> <br />"
-        // x.innerHTML = "Oh no!  Oh no no on!!!  That didn't work!  I'm scared my person will never find me!  Will you take me to a &quot;Lost and Found&quot; or something?  I hope they can help!"
-
         switch(error.code) {
           case error.PERMISSION_DENIED:
             var note = '***User Refused Geolocation***'
             var try_again = false
             geo_tries = 7
-            alert('Oh, I'm sorry, Location Services can help you let my person know where I am.  It is not required, but if you change your mind, you may need to scan the tag again in an InCognito window (or similar).')
+            document.getElementById('declined').style.display='block'
             break;
           case error.POSITION_UNAVAILABLE:
             var note = '***Position Unavailable***'
