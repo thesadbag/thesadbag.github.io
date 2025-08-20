@@ -262,7 +262,7 @@
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
-        contactServer({bagid: searchParams.get("bagid"), action: 'check_bag'})
+        contactServer({bagid: searchParams.get("bagid"), action: 'bag_check'})
         window.onload = function() {
           startTimeout(15000)
         }
