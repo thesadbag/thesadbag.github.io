@@ -272,7 +272,7 @@
       }
 
       function contactServer(json_struct){
-        // console.log(JSON.stringify(json_struct))
+        console.log(JSON.stringify(json_struct))
         var get_string = ''
         for (const [key, value] of Object.entries(json_struct)) {
           get_string += "&" + key + "=" + value 
@@ -289,10 +289,10 @@
       }
 
       function fetchResponse(data){
-        // console.log("fetchResponse()")
-        // console.log(data)
+        console.log("fetchResponse()")
+        console.log(data)
         data = JSON.parse(data)
-        // console.log(data)
+        console.log(data)
 
         hide('loading')
 
