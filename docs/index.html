@@ -244,12 +244,12 @@
     
     <script>
       const x = document.getElementById("msg");
-      const url = "https://script.google.com/macros/s/AKfycbyJmhl9ufRa1UEZj2U_rdxn56CjP8OSYfja4AGYeSZWVAFqoqtypDnXnLqo97-uz9b8/exec";
+      const url = "https://script.google.com/macros/s/AKfycbzmt-hpC_d2_x5gVM8ZCEJpYzeQBA_Ac66w9QGweBXkqPVTn_xREcDIdteGl0sxmM1_/exec";
       let searchParams = new URLSearchParams(window.location.search);
 
       let geo_prompt = false
       let geo_tries = 0
-	    let has_bag = -1
+      let has_bag = -1
       
       if (searchParams.has("uuid")) {
         document.getElementById("uuid").value = searchParams.get("uuid")
@@ -262,7 +262,7 @@
       } else if (searchParams.has("bagid")) {
         const bagid_num = searchParams.get("bagid");
         document.getElementById("bagid").value = bagid_num
-        contactServer({bagid: searchParams.get("bagid"), action: 'check_bag'})
+        contactServer({bagid: searchParams.get("bagid")})
         window.onload = function() {
           startTimeout(15000)
         }
