@@ -252,7 +252,7 @@
       let has_bag = -1
       
       if (searchParams.has("uuid")) {
-        document.getElementById("uuid").value = searchParams.get("uuid")
+        document.getElementById("uuid_register").value = searchParams.get("uuid")
         document.getElementById("uuid_update").value = searchParams.get("uuid")
         if (searchParams.get('action') == 'verify'){
           contactServer({uuid: searchParams.get("uuid"), action: 'verify'})
