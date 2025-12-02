@@ -226,7 +226,7 @@
         <h2 class="w3-center">Bag Tag Registered</h2>
         <div class="card">
           <header>
-            <h4 class="w3-center" id="bagid_register_header">Bag Tag Number</h4>
+            <h4 class="w3-center" id="bagid_registered_header">Bag Tag Number</h4>
           </header>
 					<p>This bag has been registered.  Check your email for a verification link to enable your bag tag.</p>
         </div>
@@ -245,6 +245,7 @@
           <header>
             <h4 class="w3-center" id="bagid_verified_header" name='bag_tag_number'>Bag Tag Number</h4>
           </header>
+          <p id="bagid_verified"></p>
         </div>
         <div id="register_panel" class="w3-container w3-panel w3-blue w3-center w3-hide">
           <p id="msg_verified"></p>
@@ -333,12 +334,12 @@
         } else if (data.action == 'not_registered') {
           show('no-bag')
         } else if (data.action == 'verified') {
-          document.getElementById('bagid_register_header').innerText = data.uuid
-          document.getElementById("bagid_verified").innerText = data.desc + ' verified'
+          document.getElementById('bagid_verified_header').innerText = data.uuid
+          document.getElementById("bagid_verified").innerText = 'Email Address for' + data.desc + ' verified'
           show('verified')
         } else if (data.action == 'not_verified'){
-          document.getElementById('bagid_register_header').innerText = data.uuid
-          document.getElementById("bagid_verified").innerText = data.desc + ' not verified'
+          document.getElementById('bagid_verified_header').innerText = data.uuid
+          document.getElementById("bagid_verified").innerText = 'Email Address for ' +data.desc + ' not verified'
           show('verified')			
         } else if (data.action == 'no_bag') {
           show('no-bag')
