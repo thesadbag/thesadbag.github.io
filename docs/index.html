@@ -219,6 +219,23 @@
       </div>
     </div>
     <!-- End Register -->
+
+		<!-- Registered -->
+    <div id="registered" class=" w3-hide">
+      <div class="w3-container w3-content w3-padding-32" style="max-width:800px;margin-top:46px">
+        <h2 class="w3-center">Bag Tag Registered</h2>
+        <div class="card">
+          <header>
+            <h4 class="w3-center" id="bagid_register_header">Bag Tag Number</h4>
+          </header>
+					<p>This bag has been registered.  Check your email for a verification link to enable your bag tag.</p>
+        </div>
+        <div id="register_panel" class="w3-container w3-panel w3-blue w3-center w3-hide">
+          <p id="msg_registered"></p>
+        </div>
+      </div>
+    </div>
+		<!-- End Registered -->
       
     <!-- Verified -->
     <div id="verified" class=" w3-hide">
@@ -230,7 +247,7 @@
           </header>
         </div>
         <div id="register_panel" class="w3-container w3-panel w3-blue w3-center w3-hide">
-          <p id="msg_register"></p>
+          <p id="msg_verified"></p>
         </div>
       </div>
     </div>
@@ -386,6 +403,8 @@
                        reward: btoa(document.getElementById("reward_register").value),
                        misc: btoa(document.getElementById("misc_register").innerText),
                        lost: losted})
+		  	hide('register')
+				show('registered')
       }
 
       function sendUpdate() {
